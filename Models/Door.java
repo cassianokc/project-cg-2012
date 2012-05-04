@@ -53,8 +53,8 @@ public class Door extends Model {
             else doorState = 0;
         }
         if (doorState == 2){
-            if (alpha < 90f)
-                alpha++;
+            if (alpha > 0f)
+                alpha--;
             else doorState = 0;
         }        
         GL gl = glAutodrawable.getGL();
