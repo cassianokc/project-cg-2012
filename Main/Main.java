@@ -16,15 +16,17 @@ import javax.swing.JFrame;
  * @author gustavo
  */
 public class Main {
+    private static GLCanvas canvas;
+    private static GLCapabilities caps;
     
     public static void main(String[] args) {
         //acelera o rendering   
-        GLCapabilities caps = new GLCapabilities();
+        caps = new GLCapabilities();
         caps.setDoubleBuffered(true);
         caps.setHardwareAccelerated(true);
 
         //cria o painel e adiciona um ouvinte GLEventListener
-        GLCanvas canvas = new GLCanvas(caps);
+        canvas = new GLCanvas(caps);
         Renderer r;
         r = new Renderer();
 
@@ -33,7 +35,6 @@ public class Main {
         canvas.addKeyListener(r);
         canvas.addMouseListener(r);
         canvas.addMouseMotionListener(r);
-        
         
 
         //cria uma janela e adiciona o painel
@@ -49,5 +50,9 @@ public class Main {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         animator.start();
+    }
+    
+    public static GLCanvas getCanvas(){
+        return Main.canvas;
     }
 }
