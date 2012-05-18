@@ -1,0 +1,10 @@
+mtllib wall.mtl
+
+v 0.0 0.0 0.0
+v 0.0 3.0 0.0
+v 0.0 3.0 10.0
+v 0.0 0.0 10.0
+
+g wall2
+usemtl wall
+f 1 2 3 4

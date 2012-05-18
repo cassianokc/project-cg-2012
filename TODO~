@@ -1,0 +1,12 @@
+* Tratar eventos de mouse.
+* Fazer um algoritmo:
+ Dado um ponto (xref, yref, zref), e uma direcao n, determinar em qual ponto ele vai interceptar o plano definido por a, b, c e d
+PRA QUEM GOSTA DE G.A. ^^ to com preguica.
+
+Coordenadas dos vértices da skybox:
+Chao
+(0, 0, 0) (0, 0, 10) (20, 0, 0)
+(0, 0, 10) (20, 0, 0) (20, 0, 10)
+Parede da sala
+(0, 0, 0) (0, 3, 0) (0, 0, 10)
+(0, 3, 0) (0, 0, 10) (0, 3, 10) 

@@ -1,0 +1,46 @@
+# Blender3D MTL File: 
+# Material Count: 4
+newmtl chair1_wood13b.jpg_wood13b.jpg
+Ns 92.156863
+Ka 0.000000 0.000000 0.000000
+Kd 0.298666 0.298666 0.298666
+Ks 0.250000 0.250000 0.250000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd wood13b.jpg
+
+
+newmtl chair1b_wood13b.jpg_wood13b.jpg
+Ns 92.156863
+Ka 0.000000 0.000000 0.000000
+Kd 0.298666 0.298666 0.298666
+Ks 0.250000 0.250000 0.250000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd wood13b.jpg
+
+
+newmtl sitz_wood13b.jpg_wood13b.jpg
+Ns 92.156863
+Ka 0.000000 0.000000 0.000000
+Kd 0.348862 0.348862 0.348862
+Ks 0.250000 0.250000 0.250000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd wood13b.jpg
+
+
+newmtl chair1c_wood13b.jpg_wood13b.jpg
+Ns 92.156863
+Ka 0.000000 0.000000 0.000000
+Kd 0.298666 0.298666 0.298666
+Ks 0.250000 0.250000 0.250000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd wood13b.jpg
+
+

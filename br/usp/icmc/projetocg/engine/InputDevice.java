@@ -28,7 +28,6 @@ public class InputDevice implements MouseListener, MouseMotionListener, KeyListe
     private float posx;  // posicao x atual da camera
     private float posy;  // posicao y atual da camera, provavelmente nunca sera mudado
     private float posz;  // posicao z atual da camera
-    private float zoom;
     
     public InputDevice(GLCanvas canvas, Renderer renderer){
         this.canvas = canvas;
@@ -38,7 +37,6 @@ public class InputDevice implements MouseListener, MouseMotionListener, KeyListe
         this.posx = this.renderer.getPosx();
         this.posy = this.renderer.getPosy();
         this.posz = this.renderer.getPosz();
-        this.zoom = this.renderer.getZoom();
     }
     
     public void setCanvas(GLCanvas canvas)
@@ -81,9 +79,11 @@ public class InputDevice implements MouseListener, MouseMotionListener, KeyListe
     }
     
     public void mouseMoved(MouseEvent me) {
-        processMouseMove(me, this.canvas);
         if(isRelative())
+        {
+            processMouseMove(me, this.canvas);
             centerMouse(this.canvas);
+        }
     }
 
     public void keyTyped(KeyEvent ke) {
@@ -91,55 +91,32 @@ public class InputDevice implements MouseListener, MouseMotionListener, KeyListe
 
     public void keyPressed(KeyEvent ke) {
         switch (ke.getKeyCode()) {
-            case KeyEvent.VK_PAGE_UP:
-                beta = beta + 0.1f;
-                renderer.setBeta(beta);
-                break;
-            case KeyEvent.VK_PAGE_DOWN:
-                beta = beta - 0.1f;
-                renderer.setBeta(beta);
-                break;
-            case KeyEvent.VK_P:
-                alpha = alpha + 0.1f;
-                renderer.setAlpha(alpha);
-                break;
-            case KeyEvent.VK_O:
-                alpha = alpha - 0.1f;
-                renderer.setAlpha(alpha);
-                break;
             case KeyEvent.VK_W:
-                posz = (float) (posz + 0.1f * Math.sin(alpha));
-                posx = (float) (posx + 0.1f * Math.cos(alpha));
+                posz = (float) (posz + 0.2f * Math.sin(alpha));
+                posx = (float) (posx + 0.2f * Math.cos(alpha));
                 renderer.setPosx(posx);
                 renderer.setPosz(posz);
                 break;
             case KeyEvent.VK_S:
-                posz = (float) (posz - 0.1f * Math.sin(alpha));
-                posx = (float) (posx - 0.1f * Math.cos(alpha));
+                posz = (float) (posz - 0.2f * Math.sin(alpha));
+                posx = (float) (posx - 0.2f * Math.cos(alpha));
                 renderer.setPosx(posx);
                 renderer.setPosz(posz);
                 break;
             case KeyEvent.VK_A:
-                posz = (float) (posz - 0.1f * Math.cos(alpha));
-                posx = (float) (posx + 0.1f * Math.sin(alpha));
+                posz = (float) (posz - 0.2f * Math.cos(alpha));
+                posx = (float) (posx + 0.2f * Math.sin(alpha));
                 renderer.setPosx(posx);
                 renderer.setPosz(posz);
                 break;
             case KeyEvent.VK_D:
-                posz = (float) (posz + 0.1f * Math.cos(alpha));
-                posx = (float) (posx - 0.1f * Math.sin(alpha));
+                posz = (float) (posz + 0.2f * Math.cos(alpha));
+                posx = (float) (posx - 0.2f * Math.sin(alpha));
                 renderer.setPosx(posx);
                 renderer.setPosz(posz);
                 break;
-            case KeyEvent.VK_B:
-                zoom = zoom * 0.809f;
-                renderer.setZoom(zoom);
-                break;
             case KeyEvent.VK_SPACE:
-                if(isRelative())
-                    setRelative(false);
-                else
-                    setRelative(true);
+               setRelative(!isRelative());
                 break;
         }
     }
@@ -173,13 +150,13 @@ public class InputDevice implements MouseListener, MouseMotionListener, KeyListe
 	int rightStep  = curMouseX - (canvas.getWidth() / 2);
 	if( rightStep > maxStep )
         {
-            alpha = renderer.getAlpha() + 0.03f; /* DIREITA */
+            alpha = renderer.getAlpha() + 0.06f; /* DIREITA */
             renderer.setAlpha(alpha);
             rightStep = maxStep;
         }
 	else if( rightStep < -maxStep ) 
         {
-            alpha = renderer.getAlpha() - 0.03f; /* ESQUERDA */
+            alpha = renderer.getAlpha() - 0.06f; /* ESQUERDA */
             renderer.setAlpha(alpha);
             rightStep = -maxStep; 
             
@@ -188,13 +165,13 @@ public class InputDevice implements MouseListener, MouseMotionListener, KeyListe
         int upStep  = curMouseY - (canvas.getHeight() / 2);
 	if( upStep > maxStep )
         {
-            beta = renderer.getBeta() - 0.03f;      /* BAIXO */
+            beta = renderer.getBeta() - 0.06f;      /* BAIXO */
             renderer.setBeta(beta);
             upStep = maxStep;
         }
 	else if( upStep < -maxStep)
         {
-            beta = renderer.getBeta() + 0.03f;     /* CIMA */
+            beta = renderer.getBeta() + 0.06f;     /* CIMA */
             renderer.setBeta(beta);
             upStep = -maxStep;
         }

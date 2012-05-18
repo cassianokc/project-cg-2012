@@ -1,12 +1,23 @@
-* Tratar eventos de mouse.
 * Fazer um algoritmo:
  Dado um ponto (xref, yref, zref), e uma direcao n, determinar em qual ponto ele vai interceptar o plano definido por a, b, c e d
-PRA QUEM GOSTA DE G.A. ^^ to com preguica.
+PRA QUEM GOSTA DE G.A. ^^ to com preguica, será usado para tratar colisao com as paredes
+Montar a cena, usando blender.
+Modelos que falta:
+Vaso
+Pia
+Box de chuveiro
+Portas
+Geladeira
+Fogao
+Maquina de lavar Roupas
+Sofa
+Cama
+Criado mudo
+Armario
+Escrivaninha
+Ventilador
+etc..etc.., o que voces acharem que pode ser interessante favor avisar os irmao!
 
-Coordenadas dos vértices da skybox:
-Chao
-(0, 0, 0) (0, 0, 10) (20, 0, 0)
-(0, 0, 10) (20, 0, 0) (20, 0, 10)
-Parede da sala
-(0, 0, 0) (0, 3, 0) (0, 0, 10)
-(0, 3, 0) (0, 0, 10) (0, 3, 10) 
+Texturas:
+das paredes, do chao e do teto.
+
