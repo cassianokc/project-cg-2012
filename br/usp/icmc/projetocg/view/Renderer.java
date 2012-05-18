@@ -89,7 +89,7 @@ public class Renderer implements GLEventListener {
 
         gl.glMatrixMode(GL.GL_PROJECTION);
         gl.glLoadIdentity();
-        glu.gluPerspective(60.0, 1.0, 0.1, 30.0);
+        glu.gluPerspective(45.0, 1.0, 0.1, 30.0);
         /*
          * Draws the models.
          */
@@ -134,45 +134,44 @@ public class Renderer implements GLEventListener {
     public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
         //função para mudança no display
     }
+    
+    
 
     public void loadSkyboxModels(GLAutoDrawable drawable) {
         try {
             SkyboxPiece model = new SkyboxPiece(new File("./project-cg-2012/floor.obj"));
-            model.facetNormals();
-            model.vertexNormals(90);
-            model.dump(false);
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL);
             model = new SkyboxPiece(new File("./project-cg-2012/ceilling.obj"));
-            model.facetNormals();
-            model.vertexNormals(90);
-            model.dump(false);
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL);
             model = new SkyboxPiece(new File("./project-cg-2012/wall1.obj"));
-            model.facetNormals();
-            model.vertexNormals(90);
-            model.dump(false);
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL);
             model = new SkyboxPiece(new File("./project-cg-2012/wall2.obj"));
-            model.facetNormals();
-            model.vertexNormals(90);
-            model.dump(false);
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL);
             model = new SkyboxPiece(new File("./project-cg-2012/wall3.obj"));
-            model.facetNormals();
-            model.vertexNormals(90);
-            model.dump(false);
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL);
             model = new SkyboxPiece(new File("./project-cg-2012/wall4.obj"));
-            model.facetNormals();
-            model.vertexNormals(90);
-            model.dump(false);
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL);
+            model = new SkyboxPiece(new File("./project-cg-2012/wall5.obj"));
+            this.skyboxModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL);
+            model = new SkyboxPiece(new File("./project-cg-2012/wall6.obj"));
+            this.skyboxModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL);
+            model = new SkyboxPiece(new File("./project-cg-2012/wall7.obj"));
+            this.skyboxModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL);
+            model = new SkyboxPiece(new File("./project-cg-2012/wall8.obj"));
+            this.skyboxModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL);
+
+
+
         } catch (IOException ex) {
             Logger.getLogger(Renderer.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -204,7 +203,6 @@ public class Renderer implements GLEventListener {
         this.posz = posz;
     }
 
-
     public float getAlpha() {
         return this.alpha;
     }
@@ -228,5 +226,4 @@ public class Renderer implements GLEventListener {
     public float getPosz() {
         return this.posz;
     }
-
 }

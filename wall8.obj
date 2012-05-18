@@ -1,0 +1,12 @@
+usemtl wall.mtl
+
+v 6.45 0.0 2.9
+v 7.4 0.0 2.9
+v 7.4 3.0 2.9
+v 6.45 3.0 2.9
+
+g wall1
+usemtl wall
+f 1 2 3 4
+
+

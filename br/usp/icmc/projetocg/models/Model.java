@@ -88,6 +88,9 @@ public class Model {
     public Model(File file) throws IOException {
         readOBJ(file);
         this.objectid = -1;
+        this.facetNormals();
+        this.vertexNormals(90);
+        this.dump(false);
     }
 
     /**
