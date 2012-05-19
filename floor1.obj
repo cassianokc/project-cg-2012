@@ -1,0 +1,11 @@
+# Blender v2.58 (sub 0) OBJ File: ''
+# www.blender.org
+mtllib floor1.mtl
+o Mesh_floor
+v 0.000000 0.000000 0.000000
+v 0.000000 -0.000001 6.590000
+v 10.850000 -0.000001 6.590000
+v 10.850000 0.000000 0.000000
+usemtl floor
+s off
+f 1 2 3 4

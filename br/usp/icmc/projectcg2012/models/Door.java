@@ -1,4 +1,4 @@
-package br.usp.icmc.projetocg.models;
+package br.usp.icmc.projectcg2012.models;
 
 import java.io.File;
 import java.io.IOException;

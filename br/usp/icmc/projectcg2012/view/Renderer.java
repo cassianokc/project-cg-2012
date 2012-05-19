@@ -1,8 +1,9 @@
-package br.usp.icmc.projetocg.view;
+package br.usp.icmc.projectcg2012.view;
 
-import br.usp.icmc.projetocg.models.*;
-import br.usp.icmc.projetocg.engine.InputDevice;
-import br.usp.icmc.projetocg.main.Main;
+import br.usp.icmc.projectcg2012.models.SkyboxPiece;
+import br.usp.icmc.projectcg2012.models.Model;
+import br.usp.icmc.projectcg2012.engine.InputDevice;
+import br.usp.icmc.projectcg2012.main.Main;
 import com.sun.opengl.util.GLUT;
 import java.io.File;
 import java.io.IOException;
@@ -46,9 +47,9 @@ public class Renderer implements GLEventListener {
         this.skyboxModels = new ArrayList<SkyboxPiece>();
         this.alpha = 0f;
         this.beta = 0f;
-        posx = 5f;
-        posy = 1f;
-        posz = 5f;
+        posx = 1f;
+        posy = 1.8f;
+        posz = 1f;
         input = new InputDevice(Main.getCanvas(), this);
     }
 
@@ -134,14 +135,12 @@ public class Renderer implements GLEventListener {
     public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
         //função para mudança no display
     }
-    
-    
 
     public void loadSkyboxModels(GLAutoDrawable drawable) {
         try {
             SkyboxPiece model = new SkyboxPiece(new File("./project-cg-2012/floor.obj"));
             this.skyboxModels.add(model);
-            model.compile(drawable, Model.WF_MATERIAL);
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_FLAT);
             model = new SkyboxPiece(new File("./project-cg-2012/ceilling.obj"));
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL);
@@ -169,6 +168,36 @@ public class Renderer implements GLEventListener {
             model = new SkyboxPiece(new File("./project-cg-2012/wall8.obj"));
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL);
+            model = new SkyboxPiece(new File("./project-cg-2012/wall9.obj"));
+            this.skyboxModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL);
+            model = new SkyboxPiece(new File("./project-cg-2012/wall10.obj"));
+            this.skyboxModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL);
+            model = new SkyboxPiece(new File("./project-cg-2012/wall11.obj"));
+            this.skyboxModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL);
+            model = new SkyboxPiece(new File("./project-cg-2012/wall12.obj"));
+            this.skyboxModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL);
+            model = new SkyboxPiece(new File("./project-cg-2012/wall13.obj"));
+            this.skyboxModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL);
+            model = new SkyboxPiece(new File("./project-cg-2012/wall14.obj"));
+            this.skyboxModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL);
+            model = new SkyboxPiece(new File("./project-cg-2012/wall15.obj"));
+            this.skyboxModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL);
+            model = new SkyboxPiece(new File("./project-cg-2012/wall16.obj"));
+            this.skyboxModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL);
+            model = new SkyboxPiece(new File("./project-cg-2012/wall17.obj"));
+            this.skyboxModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL);
+            model = new SkyboxPiece(new File("./project-cg-2012/wall18.obj"));
+            this.skyboxModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL);
 
 
 
@@ -178,9 +207,18 @@ public class Renderer implements GLEventListener {
     }
 
     public void loadNormalModels(GLAutoDrawable drawable) {
+        try {
+
+            Model model = new Model(new File("./project-cg-2012/top.obj"));
+            this.normalModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL);
+        } catch (IOException ex) {
+            Logger.getLogger(Renderer.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void loadAnimatedModels(GLAutoDrawable drawable) {
+
     }
 
     public void setAlpha(float alpha) {

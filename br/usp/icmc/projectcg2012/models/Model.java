@@ -26,7 +26,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-package br.usp.icmc.projetocg.models;
+package br.usp.icmc.projectcg2012.models;
 
 import com.sun.opengl.util.ImageUtil;
 import com.sun.opengl.util.texture.TextureData;

@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.usp.icmc.projetocg.engine;
+package br.usp.icmc.projectcg2012.engine;
 
-import br.usp.icmc.projetocg.view.Renderer;
+import br.usp.icmc.projectcg2012.view.Renderer;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.MemoryImageSource;

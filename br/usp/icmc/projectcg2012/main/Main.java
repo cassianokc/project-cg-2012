@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.usp.icmc.projetocg.main;
+package br.usp.icmc.projectcg2012.main;
 
-import br.usp.icmc.projetocg.view.Renderer;
+import br.usp.icmc.projectcg2012.view.Renderer;
 import com.sun.opengl.util.Animator;
 import com.sun.opengl.util.FPSAnimator;
 import javax.media.opengl.GLCanvas;
