@@ -1,4 +1,4 @@
-usemtl wall.mtl
+mtllib wall.mtl
 
 v 5.75 0.0 4.34
 v 5.75 0.0 6.59

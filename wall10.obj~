@@ -1,13 +1,14 @@
-mtllib wall.mtl
+usemtl wall.mtl
 
-v 4.8 0.0 4.34
 v 5.75 0.0 4.34
+v 5.75 0.0 6.59
+v 5.75 3.0 6.59
 v 5.75 3.0 4.34
-v 4.8 3.0 4.34
 
-g wall12
+g wall10
 usemtl wall
 f 1 2 3 4
+
 
 
 
