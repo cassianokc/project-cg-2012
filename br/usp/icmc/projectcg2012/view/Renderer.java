@@ -120,7 +120,7 @@ public class Renderer implements GLEventListener {
     float[] ambient = {0.3f, 0.3f, 0.3f, 1.0f};
         float[] diffuse = new float[]{0.75f, 0.75f, 0.75f, 1.0f};
         float[] specular = new float[]{0.75f, 0.75f, 0.75f, 1.0f};
-        float[] position = new float[]{posx, posy, posz, 1.0f};
+        float[] position = new float[]{posx, posy+3, posz, 1.0f};
 
         // Define os parametros da luz de numero 0
         gl.glLightfv(GL.GL_LIGHT0, GL.GL_AMBIENT, ambient, 0);
