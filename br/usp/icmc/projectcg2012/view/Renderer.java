@@ -64,6 +64,7 @@ public class Renderer implements GLEventListener
         drawable.setGL(new DebugGL(drawable.getGL()));
         gl.glEnable(GL.GL_LIGHTING);
         gl.glEnable(GL.GL_LIGHT0);
+        gl.glEnable(GL.GL_DEPTH_TEST);
         lighting(drawable);
         shader(drawable);
         /*
@@ -134,11 +135,11 @@ public class Renderer implements GLEventListener
         };
         float[] diffuse = new float[]
         {
-            0.8f, 0.8f, 0.8f, 1.0f
+            0.9f, 0.9f, 0.9f, 1.0f
         };
         float[] specular = new float[]
         {
-            0.2f, 0.2f, 0.2f, 1.0f
+            0.5f, 0.5f, 0.5f, 1.0f
         };
         float[] position = new float[]
         {
@@ -153,7 +154,9 @@ public class Renderer implements GLEventListener
         gl.glLightfv(GL.GL_LIGHT0, GL.GL_DIFFUSE, diffuse, 0);
         gl.glLightfv(GL.GL_LIGHT0, GL.GL_SPECULAR, specular, 0);
         gl.glLightfv(GL.GL_LIGHT0, GL.GL_POSITION, position, 0);
-
+        gl.glLightf(GL.GL_LIGHT0, GL.GL_CONSTANT_ATTENUATION, 1f); //dene a0
+        gl.glLightf(GL.GL_LIGHT0, GL.GL_LINEAR_ATTENUATION, 0.5f); //dene a1
+        gl.glLightf(GL.GL_LIGHT0, GL.GL_QUADRATIC_ATTENUATION, 0.5f); //dene a2
     }
 
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height)
@@ -262,11 +265,11 @@ public class Renderer implements GLEventListener
         int v = gl.glCreateShader(GL.GL_VERTEX_SHADER);
         int f = gl.glCreateShader(GL.GL_FRAGMENT_SHADER);
 
-        String[] vsrc = readShader("./project-cg-2012/shaders/vertex_shader");
+        String[] vsrc = readShader("./project-cg-2012/shaders/vertex_shader.c");
         gl.glShaderSource(v, 1, vsrc, null, 0);
         gl.glCompileShader(v);
 
-        String[] fsrc = readShader("./project-cg-2012/shaders/fragment_shader");
+        String[] fsrc = readShader("./project-cg-2012/shaders/fragment_shader.c");
         gl.glShaderSource(f, 1, fsrc, null, 0);
         gl.glCompileShader(f);
 
