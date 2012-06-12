@@ -65,6 +65,7 @@ public class Renderer implements GLEventListener
         drawable.setGL(new DebugGL(drawable.getGL()));
         gl.glEnable(GL.GL_LIGHTING);
         gl.glEnable(GL.GL_LIGHT0);
+        lighting(drawable);
         shader(drawable);
         /*
          * Loads and compiles, adding to the proper array list all models.
@@ -138,19 +139,19 @@ public class Renderer implements GLEventListener
 
         float[] ambient =
         {
-            0.0f, 0.0f, 0.0f, 1.0f
+            0.2f, 0.2f, 0.2f, 1.0f
         };
         float[] diffuse = new float[]
         {
-            0.75f, 0.75f, 0.75f, 1.0f
+            0.8f, 0.8f, 0.8f, 1.0f
         };
         float[] specular = new float[]
         {
-            0.75f, 0.75f, 0.75f, 1.0f
+            0.2f, 0.2f, 0.2f, 1.0f
         };
         float[] position = new float[]
         {
-            posx, posy + 3, posz, 1.0f
+            posx, posy + 1, posz, 1.0f
         };
         float[] direction = new float[]
         {
@@ -162,9 +163,7 @@ public class Renderer implements GLEventListener
         gl.glLightfv(GL.GL_LIGHT0, GL.GL_DIFFUSE, diffuse, 0);
         gl.glLightfv(GL.GL_LIGHT0, GL.GL_SPECULAR, specular, 0);
         gl.glLightfv(GL.GL_LIGHT0, GL.GL_POSITION, position, 0);
-        gl.glLightfv(GL.GL_LIGHT0, GL.GL_SPOT_DIRECTION, direction, 0); //vetor direção
-        gl.glLightf(GL.GL_LIGHT0, GL.GL_SPOT_CUTOFF, 10.0f); //espalhamento angular
-        gl.glLightf(GL.GL_LIGHT0, GL.GL_SPOT_EXPONENT, 0.5f); //atenuação angular
+        
     }
 
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height)

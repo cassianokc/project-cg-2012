@@ -13,16 +13,16 @@ vec3 L = normalize(gl_LightSource[0].position.xyz - v);
            vec3 R = normalize(-reflect(L,N));  
 
            //calculate Ambient Term:  
-           vec4 Iamb = gl_FrontLightProduct[0].ambient;    
+           vec4 Iamb = gl_FrontLightProduct[0].ambient * gl_LightSource[0].ambient;;    
 
            //calculate Diffuse Term:  
-           vec4 Idiff = gl_FrontLightProduct[0].diffuse * max(dot(N,L), 0.0);    
+           vec4 Idiff = gl_FrontLightProduct[0].diffuse * gl_LightSource[0].diffuse * max(dot(N,L), 0.0);    
 
            // calculate Specular Term:
-           vec4 Ispec = gl_FrontLightProduct[0].specular 
+           vec4 Ispec = gl_FrontLightProduct[0].specular  * gl_LightSource[0].specular
                         * pow(max(dot(R,E),0.0),0.3*gl_FrontMaterial.shininess);
 
-            finalColor+=Iamb + Idiff + Ispec;
-       // write Total Color:
-       gl_FragColor = gl_FrontLightModelProduct.sceneColor + (texture2D(myTexture, vTexCoord)) + finalColor;
+            finalColor = Iamb + Idiff + Ispec;
+       	// write Total Color:
+	       gl_FragColor = (texture2D(myTexture, vTexCoord))*gl_LightSource[0].ambient + finalColor;
     }
