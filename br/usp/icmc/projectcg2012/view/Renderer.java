@@ -117,7 +117,7 @@ public class Renderer implements GLEventListener {
     private void lighting(GLAutoDrawable drawable) {
         GL gl = drawable.getGL();
 
-        float[] ambient = {0.3f, 0.3f, 0.3f, 1.0f};
+    float[] ambient = {0.3f, 0.3f, 0.3f, 1.0f};
         float[] diffuse = new float[]{0.75f, 0.75f, 0.75f, 1.0f};
         float[] specular = new float[]{0.75f, 0.75f, 0.75f, 1.0f};
         float[] position = new float[]{posx, posy, posz, 1.0f};
@@ -141,7 +141,7 @@ public class Renderer implements GLEventListener {
             SkyboxPiece model = new SkyboxPiece(new File("./project-cg-2012/floortex.obj"));
             model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
             this.skyboxModels.add(model);
-            model = new SkyboxPiece(new File("./project-cg-2012/ceillingtex.obj"));
+            model = new SkyboxPiece(new File("./project-cg-2012/ceilling.obj"));
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
             model = new SkyboxPiece(new File("./project-cg-2012/wall1tex.obj"));
