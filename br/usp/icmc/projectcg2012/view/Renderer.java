@@ -119,8 +119,8 @@ public class Renderer implements GLEventListener {
 
         float[] ambient = {0.3f, 0.3f, 0.3f, 1.0f};
         float[] diffuse = new float[]{0.75f, 0.75f, 0.75f, 1.0f};
-        float[] specular = new float[]{0.7f, 0.7f, 0.7f, 1.0f};
-        float[] position = new float[]{10, 10, 5, 1.0f};
+        float[] specular = new float[]{0.75f, 0.75f, 0.75f, 1.0f};
+        float[] position = new float[]{posx, posy, posz, 1.0f};
 
         // Define os parametros da luz de numero 0
         gl.glLightfv(GL.GL_LIGHT0, GL.GL_AMBIENT, ambient, 0);
@@ -138,15 +138,15 @@ public class Renderer implements GLEventListener {
 
     public void loadSkyboxModels(GLAutoDrawable drawable) {
         try {
-            SkyboxPiece model = new SkyboxPiece(new File("./project-cg-2012/floor.obj"));
+            SkyboxPiece model = new SkyboxPiece(new File("./project-cg-2012/floortex.obj"));
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
             this.skyboxModels.add(model);
-            model.compile(drawable, Model.WF_MATERIAL | Model.WF_FLAT);
-            model = new SkyboxPiece(new File("./project-cg-2012/ceilling.obj"));
+            model = new SkyboxPiece(new File("./project-cg-2012/ceillingtex.obj"));
             this.skyboxModels.add(model);
-            model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxPiece(new File("./project-cg-2012/wall1.obj"));
-            this.skyboxModels.add(model);
-            model.compile(drawable, Model.WF_MATERIAL);
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new SkyboxPiece(new File("./project-cg-2012/wall1tex.obj"));
+            this.skyboxModels.add(model);   
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
             model = new SkyboxPiece(new File("./project-cg-2012/wall2.obj"));
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL);
