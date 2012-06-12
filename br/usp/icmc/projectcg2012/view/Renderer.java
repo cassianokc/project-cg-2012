@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.media.opengl.DebugGL;
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
@@ -23,6 +24,8 @@ public class Renderer implements GLEventListener
     private float posx;  // camera current x position
     private float posy;  // camera current y position
     private float posz;  // camera current z position
+    private float ang_senoide;
+    private float raio;
     /*
      * Array containing all normal models.
      */
@@ -51,6 +54,8 @@ public class Renderer implements GLEventListener
         posx = 1f;
         posy = 1.8f;
         posz = 1f;
+        ang_senoide = 0.0f;
+        raio = 100000.0f;
         input = new InputDevice(Main.getCanvas(), this);
     }
 
@@ -62,7 +67,7 @@ public class Renderer implements GLEventListener
         gl.glEnable(GL.GL_DEPTH_TEST);
 //        gl.glEnable(GL.GL_SMOOTH);
         //lighting(drawable);
-        //shader(drawable);
+        shader(drawable);
         /*
          * Loads and compiles, adding to the proper array list all models.
          */
@@ -87,8 +92,9 @@ public class Renderer implements GLEventListener
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
         gl.glMatrixMode(GL.GL_MODELVIEW);
         gl.glLoadIdentity();
-        glu.gluLookAt(posx, posy, posz, //camera position
-                posx + Math.cos(alpha), posy + beta, posz + Math.sin(alpha), //vector to where the camera points
+        
+        glu.gluLookAt(posx, 1.8f + Math.sin(ang_senoide)*0.06f, posz, //camera position
+                (raio)*(Math.sin(alpha))+(posx)*(Math.sin(alpha)), raio*beta + 1.8 + posy + Math.sin(ang_senoide)*0.06f, (-raio)*(Math.cos(alpha))+(posz)*(Math.cos(alpha)), //vector to where the camera points
                 0.0, 1.0, 0.0); // viewup vector
 
         gl.glMatrixMode(GL.GL_PROJECTION);
@@ -330,6 +336,10 @@ public void loadAnimatedModels(GLAutoDrawable drawable) {
     public void setPosz(float posz) {
         this.posz = posz;
     }
+    
+    public void setAngSenoide(float ang_senoide) {
+        this.ang_senoide = ang_senoide;
+    }
 
     public float getAlpha() {
         return this.alpha;
@@ -353,5 +363,9 @@ public void loadAnimatedModels(GLAutoDrawable drawable) {
 
     public float getPosz() {
         return this.posz;
+    }
+    
+    public float getAngSenoide() {
+        return this.ang_senoide;
     }
 }

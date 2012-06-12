@@ -28,6 +28,7 @@ public class InputDevice implements MouseListener, MouseMotionListener, KeyListe
     private float posx;  // posicao x atual da camera
     private float posy;  // posicao y atual da camera, provavelmente nunca sera mudado
     private float posz;  // posicao z atual da camera
+    private float ang_senoide;
     
     public InputDevice(GLCanvas canvas, Renderer renderer){
         this.canvas = canvas;
@@ -37,6 +38,7 @@ public class InputDevice implements MouseListener, MouseMotionListener, KeyListe
         this.posx = this.renderer.getPosx();
         this.posy = this.renderer.getPosy();
         this.posz = this.renderer.getPosz();
+        this.ang_senoide = this.renderer.getAngSenoide();
     }
     
     public void setCanvas(GLCanvas canvas)
@@ -92,26 +94,34 @@ public class InputDevice implements MouseListener, MouseMotionListener, KeyListe
     public void keyPressed(KeyEvent ke) {
         switch (ke.getKeyCode()) {
             case KeyEvent.VK_W:
-                posz = (float) (posz + 0.2f * Math.sin(alpha));
-                posx = (float) (posx + 0.2f * Math.cos(alpha));
+                //posz = (float) (posz + 0.06f * Math.sin(alpha));
+                //posx = (float) (posx + 0.06f * Math.cos(alpha));
+                posz -= 0.06*(Math.cos(alpha));
+                posx += 0.06*(Math.sin(alpha));
+                ang_senoide += 0.25f;
                 renderer.setPosx(posx);
                 renderer.setPosz(posz);
+                renderer.setAngSenoide(ang_senoide);
                 break;
             case KeyEvent.VK_S:
-                posz = (float) (posz - 0.2f * Math.sin(alpha));
-                posx = (float) (posx - 0.2f * Math.cos(alpha));
+                //posz = (float) (posz - 0.06f * Math.sin(alpha));
+                //posx = (float) (posx - 0.06f * Math.cos(alpha));
+                posz += 0.06*(Math.cos(alpha));
+                posx -= 0.06*(Math.sin(alpha));
+                ang_senoide -= 0.25f;
                 renderer.setPosx(posx);
                 renderer.setPosz(posz);
+                renderer.setAngSenoide(ang_senoide);
                 break;
             case KeyEvent.VK_A:
-                posz = (float) (posz - 0.2f * Math.cos(alpha));
-                posx = (float) (posx + 0.2f * Math.sin(alpha));
+//                posz = (float) (posz - 0.06f * Math.cos(alpha));
+//                posx = (float) (posx + 0.06f * Math.sin(alpha));    
                 renderer.setPosx(posx);
                 renderer.setPosz(posz);
                 break;
             case KeyEvent.VK_D:
-                posz = (float) (posz + 0.2f * Math.cos(alpha));
-                posx = (float) (posx - 0.2f * Math.sin(alpha));
+                posz = (float) (posz + 0.06f * Math.cos(alpha));
+                posx = (float) (posx - 0.06f * Math.sin(alpha));
                 renderer.setPosx(posx);
                 renderer.setPosz(posz);
                 break;
@@ -150,13 +160,13 @@ public class InputDevice implements MouseListener, MouseMotionListener, KeyListe
 	int rightStep  = curMouseX - (canvas.getWidth() / 2);
 	if( rightStep > maxStep )
         {
-            alpha = renderer.getAlpha() + 0.06f; /* DIREITA */
+            alpha = renderer.getAlpha() + 0.025f; /* DIREITA */
             renderer.setAlpha(alpha);
             rightStep = maxStep;
         }
 	else if( rightStep < -maxStep ) 
         {
-            alpha = renderer.getAlpha() - 0.06f; /* ESQUERDA */
+            alpha = renderer.getAlpha() - 0.025f; /* ESQUERDA */
             renderer.setAlpha(alpha);
             rightStep = -maxStep; 
             
@@ -165,13 +175,13 @@ public class InputDevice implements MouseListener, MouseMotionListener, KeyListe
         int upStep  = curMouseY - (canvas.getHeight() / 2);
 	if( upStep > maxStep )
         {
-            beta = renderer.getBeta() - 0.06f;      /* BAIXO */
+            beta = renderer.getBeta() - 0.025f;      /* BAIXO */
             renderer.setBeta(beta);
             upStep = maxStep;
         }
 	else if( upStep < -maxStep)
         {
-            beta = renderer.getBeta() + 0.06f;     /* CIMA */
+            beta = renderer.getBeta() + 0.025f;     /* CIMA */
             renderer.setBeta(beta);
             upStep = -maxStep;
         }
