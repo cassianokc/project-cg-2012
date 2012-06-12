@@ -15,13 +15,16 @@ import javax.swing.JFrame;
  *
  * @author gustavo
  */
-public class Main {
+public class Main
+{
+
     private static GLCanvas canvas;
     private static GLCapabilities caps;
     //private static InputDevice mouse;
     private static Renderer renderer;
-    
-    public static void main(String[] args) {
+
+    public static void main(String[] args)
+    {
         //acelera o rendering   
         caps = new GLCapabilities();
         caps.setDoubleBuffered(true);
@@ -35,7 +38,7 @@ public class Main {
         canvas.addKeyListener(renderer.getInput());
         canvas.addMouseListener(renderer.getInput());
         canvas.addMouseMotionListener(renderer.getInput());
-        
+
 
         //cria uma janela e adiciona o painel
         JFrame frame = new JFrame("Projeto");
@@ -51,12 +54,12 @@ public class Main {
         frame.setVisible(true);
         animator.start();
     }
-    
+
     public static GLCanvas getCanvas()
     {
         return Main.canvas;
     }
-    
+
     public static Renderer getRenderer()
     {
         return Main.renderer;

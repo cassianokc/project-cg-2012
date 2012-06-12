@@ -25,7 +25,6 @@
  * with JWavefront. If not, see <http://www.gnu.org/licenses/>.
  *
  * ***** END LICENSE BLOCK ***** */
-
 package br.usp.icmc.projectcg2012.models;
 
 import com.sun.opengl.util.ImageUtil;
@@ -52,7 +51,8 @@ import javax.media.opengl.GLAutoDrawable;
  *
  * @author Fernando V. Paulovich
  */
-public class Model {
+public class Model
+{
 
     /**
      * render with only vertices
@@ -85,7 +85,8 @@ public class Model {
      * @param file The file containing the object.
      * @throws IOException
      */
-    public Model(File file) throws IOException {
+    public Model(File file) throws IOException
+    {
         readOBJ(file);
         this.objectid = -1;
         this.facetNormals();
@@ -99,7 +100,8 @@ public class Model {
      *
      * @return Returns the scalefactor used.
      */
-    public float unitize() {
+    public float unitize()
+    {
         assert (vertices != null);
 
         float maxx, minx, maxy, miny, maxz, minz;
@@ -113,25 +115,32 @@ public class Model {
         maxy = miny = vertices[3 + 1];
         maxz = minz = vertices[3 + 2];
 
-        for (int i = 1; i <= numvertices; i++) {
-            if (maxx < vertices[3 * i + 0]) {
+        for (int i = 1; i <= numvertices; i++)
+        {
+            if (maxx < vertices[3 * i + 0])
+            {
                 maxx = vertices[3 * i + 0];
             }
-            if (minx > vertices[3 * i + 0]) {
+            if (minx > vertices[3 * i + 0])
+            {
                 minx = vertices[3 * i + 0];
             }
 
-            if (maxy < vertices[3 * i + 1]) {
+            if (maxy < vertices[3 * i + 1])
+            {
                 maxy = vertices[3 * i + 1];
             }
-            if (miny > vertices[3 * i + 1]) {
+            if (miny > vertices[3 * i + 1])
+            {
                 miny = vertices[3 * i + 1];
             }
 
-            if (maxz < vertices[3 * i + 2]) {
+            if (maxz < vertices[3 * i + 2])
+            {
                 maxz = vertices[3 * i + 2];
             }
-            if (minz > vertices[3 * i + 2]) {
+            if (minz > vertices[3 * i + 2])
+            {
                 minz = vertices[3 * i + 2];
             }
         }
@@ -158,7 +167,8 @@ public class Model {
         /*
          * translate around center then scale
          */
-        for (int i = 1; i <= numvertices; i++) {
+        for (int i = 1; i <= numvertices; i++)
+        {
             vertices[3 * i + 0] -= cx;
             vertices[3 * i + 1] -= cy;
             vertices[3 * i + 2] -= cz;
@@ -175,7 +185,8 @@ public class Model {
      *
      * @return The model dimensions (width, height, depth); array of 3 floats.
      */
-    public float[] dimensions() {
+    public float[] dimensions()
+    {
         assert (vertices != null);
         float maxx, minx, maxy, miny, maxz, minz;
         float dimensions[] = new float[3];
@@ -187,25 +198,32 @@ public class Model {
         maxy = miny = vertices[3 + 1];
         maxz = minz = vertices[3 + 2];
 
-        for (int i = 1; i <= numvertices; i++) {
-            if (maxx < vertices[3 * i + 0]) {
+        for (int i = 1; i <= numvertices; i++)
+        {
+            if (maxx < vertices[3 * i + 0])
+            {
                 maxx = vertices[3 * i + 0];
             }
-            if (minx > vertices[3 * i + 0]) {
+            if (minx > vertices[3 * i + 0])
+            {
                 minx = vertices[3 * i + 0];
             }
 
-            if (maxy < vertices[3 * i + 1]) {
+            if (maxy < vertices[3 * i + 1])
+            {
                 maxy = vertices[3 * i + 1];
             }
-            if (miny > vertices[3 * i + 1]) {
+            if (miny > vertices[3 * i + 1])
+            {
                 miny = vertices[3 * i + 1];
             }
 
-            if (maxz < vertices[3 * i + 2]) {
+            if (maxz < vertices[3 * i + 2])
+            {
                 maxz = vertices[3 * i + 2];
             }
-            if (minz > vertices[3 * i + 2]) {
+            if (minz > vertices[3 * i + 2])
+            {
                 minz = vertices[3 * i + 2];
             }
         }
@@ -226,8 +244,10 @@ public class Model {
      *
      * @param scale
      */
-    public void scale(float scale) {
-        for (int i = 1; i <= numvertices; i++) {
+    public void scale(float scale)
+    {
+        for (int i = 1; i <= numvertices; i++)
+        {
             vertices[3 * i + 0] *= scale;
             vertices[3 * i + 1] *= scale;
             vertices[3 * i + 2] *= scale;
@@ -238,21 +258,25 @@ public class Model {
      * Reverse the polygon winding for all polygons in this model. Default
      * winding is counter-clockwise. Also changes the direction of the normals.
      */
-    public void reverseWinding() {
+    public void reverseWinding()
+    {
         int swap;
 
-        for (int i = 0; i < numtriangles; i++) {
+        for (int i = 0; i < numtriangles; i++)
+        {
             swap = triangles[i].vindices[0];
             triangles[i].vindices[0] = triangles[i].vindices[2];
             triangles[i].vindices[2] = swap;
 
-            if (numnormals > 0) {
+            if (numnormals > 0)
+            {
                 swap = triangles[i].nindices[0];
                 triangles[i].nindices[0] = triangles[i].nindices[2];
                 triangles[i].nindices[2] = swap;
             }
 
-            if (numtexcoords > 0) {
+            if (numtexcoords > 0)
+            {
                 swap = triangles[i].tindices[0];
                 triangles[i].tindices[0] = triangles[i].tindices[2];
                 triangles[i].tindices[2] = swap;
@@ -262,7 +286,8 @@ public class Model {
         /*
          * reverse facet normals
          */
-        for (int i = 1; i <= numfacetnorms; i++) {
+        for (int i = 1; i <= numfacetnorms; i++)
+        {
             facetnorms[3 * i + 0] = -facetnorms[3 * i + 0];
             facetnorms[3 * i + 1] = -facetnorms[3 * i + 1];
             facetnorms[3 * i + 2] = -facetnorms[3 * i + 2];
@@ -271,7 +296,8 @@ public class Model {
         /*
          * reverse vertex normals
          */
-        for (int i = 1; i <= numnormals; i++) {
+        for (int i = 1; i <= numnormals; i++)
+        {
             normals[3 * i + 0] = -normals[3 * i + 0];
             normals[3 * i + 1] = -normals[3 * i + 1];
             normals[3 * i + 2] = -normals[3 * i + 2];
@@ -283,7 +309,8 @@ public class Model {
      * two vectors derived from the sides of each triangle). Assumes a
      * counter-clockwise winding.
      */
-    public void facetNormals() {
+    public void facetNormals()
+    {
         assert (vertices != null);
         float u[] = new float[3];
         float v[] = new float[3];
@@ -294,7 +321,8 @@ public class Model {
         numfacetnorms = numtriangles;
         facetnorms = new float[3 * (numfacetnorms + 1)];
 
-        for (int i = 0; i < numtriangles; i++) {
+        for (int i = 0; i < numtriangles; i++)
+        {
             triangles[i].findex = i + 1;
 
             u[0] = vertices[3 * triangles[i].vindices[1] + 0]
@@ -332,7 +360,8 @@ public class Model {
      * @param angle Maximum angle (in degrees) to smooth across.
      * @throws IOException
      */
-    public void vertexNormals(float angle) throws IOException {
+    public void vertexNormals(float angle) throws IOException
+    {
         assert (facetnorms != null);
 
         Node node;
@@ -361,14 +390,16 @@ public class Model {
          * for each vertex
          */
         members = new Node[this.numvertices + 1];
-        for (int i = 1; i <= this.numvertices; i++) {
+        for (int i = 1; i <= this.numvertices; i++)
+        {
             members[i] = null;
         }
 
         /*
          * for every triangle, create a node for each vertex in it
          */
-        for (int i = 0; i < this.numtriangles; i++) {
+        for (int i = 0; i < this.numtriangles; i++)
+        {
             node = new Node();
             node.index = i;
             node.next = members[triangles[i].vindices[0]];
@@ -389,20 +420,23 @@ public class Model {
          * calculate the average normal for each vertex
          */
         numnormals_aux = 1;
-        for (int i = 1; i <= this.numvertices; i++) {
+        for (int i = 1; i <= this.numvertices; i++)
+        {
             /*
              * calculate an average normal for this vertex by averaging the
              * facet normal of every triangle this vertex is in
              */
             node = members[i];
-            if (node == null) {
+            if (node == null)
+            {
                 throw new IOException("vertexNormals(): vertex w/o a triangle\n");
             }
             average[0] = 0.0f;
             average[1] = 0.0f;
             average[2] = 0.0f;
             avg = 0;
-            while (node != null) {
+            while (node != null)
+            {
                 /*
                  * only average if the dot product of the angle between the two
                  * facet normals is greater than the cosine of the threshold
@@ -411,7 +445,8 @@ public class Model {
                  */
                 dot = dot(this.facetnorms, (3 * triangles[node.index].findex),
                         this.facetnorms, (3 * triangles[members[i].index].findex));
-                if (dot > cos_angle) {
+                if (dot > cos_angle)
+                {
                     node.averaged = true;
                     average[0] += this.facetnorms[3 * triangles[node.index].findex + 0];
                     average[1] += this.facetnorms[3 * triangles[node.index].findex + 1];
@@ -419,13 +454,15 @@ public class Model {
                     avg = 1;			/*
                      * we averaged at least one normal!
                      */
-                } else {
+                } else
+                {
                     node.averaged = false;
                 }
                 node = node.next;
             }
 
-            if (avg > 0) {
+            if (avg > 0)
+            {
                 /*
                  * normalize the averaged normal
                  */
@@ -445,19 +482,25 @@ public class Model {
              * set the normal of this vertex in each triangle it is in
              */
             node = members[i];
-            while (node != null) {
-                if (node.averaged) {
+            while (node != null)
+            {
+                if (node.averaged)
+                {
                     /*
                      * if this node was averaged, use the average normal
                      */
-                    if (triangles[node.index].vindices[0] == i) {
+                    if (triangles[node.index].vindices[0] == i)
+                    {
                         triangles[node.index].nindices[0] = avg;
-                    } else if (triangles[node.index].vindices[1] == i) {
+                    } else if (triangles[node.index].vindices[1] == i)
+                    {
                         triangles[node.index].nindices[1] = avg;
-                    } else if (triangles[node.index].vindices[2] == i) {
+                    } else if (triangles[node.index].vindices[2] == i)
+                    {
                         triangles[node.index].nindices[2] = avg;
                     }
-                } else {
+                } else
+                {
                     /*
                      * if this node wasn't averaged, use the facet normal
                      */
@@ -467,11 +510,14 @@ public class Model {
                             this.facetnorms[3 * triangles[node.index].findex + 1];
                     this.normals[3 * numnormals_aux + 2] =
                             this.facetnorms[3 * triangles[node.index].findex + 2];
-                    if (triangles[node.index].vindices[0] == i) {
+                    if (triangles[node.index].vindices[0] == i)
+                    {
                         triangles[node.index].nindices[0] = numnormals_aux;
-                    } else if (triangles[node.index].vindices[1] == i) {
+                    } else if (triangles[node.index].vindices[1] == i)
+                    {
                         triangles[node.index].nindices[1] = numnormals_aux;
-                    } else if (triangles[node.index].vindices[2] == i) {
+                    } else if (triangles[node.index].vindices[2] == i)
+                    {
                         triangles[node.index].nindices[2] = numnormals_aux;
                     }
                     numnormals_aux++;
@@ -490,7 +536,8 @@ public class Model {
          */
         normals_aux = this.normals;
         this.normals = new float[3 * (this.numnormals + 1)];
-        for (int i = 1; i <= this.numnormals; i++) {
+        for (int i = 1; i <= this.numnormals; i++)
+        {
             this.normals[3 * i + 0] = normals_aux[3 * i + 0];
             this.normals[3 * i + 1] = normals_aux[3 * i + 1];
             this.normals[3 * i + 2] = normals_aux[3 * i + 2];
@@ -502,7 +549,8 @@ public class Model {
      * texture map. It generates these by linearly mapping the vertices onto a
      * square.
      */
-    public void linearTexture() {
+    public void linearTexture()
+    {
         Group group;
         float dimensions[];
         float x, y, scalefactor;
@@ -518,7 +566,8 @@ public class Model {
         /*
          * do the calculations
          */
-        for (int i = 1; i <= numvertices; i++) {
+        for (int i = 1; i <= numvertices; i++)
+        {
             x = vertices[3 * i + 0] * scalefactor;
             y = vertices[3 * i + 2] * scalefactor;
             texcoords[2 * i + 0] = (x + 1.0f) / 2.0f;
@@ -529,8 +578,10 @@ public class Model {
          * go through and put texture coordinate indices in all the triangles
          */
         group = groups;
-        while (group != null) {
-            for (int i = 0; i < group.numtriangles; i++) {
+        while (group != null)
+        {
+            for (int i = 0; i < group.numtriangles; i++)
+            {
                 triangles[group.triangles[i]].tindices[0] = triangles[group.triangles[i]].vindices[0];
                 triangles[group.triangles[i]].tindices[1] = triangles[group.triangles[i]].vindices[1];
                 triangles[group.triangles[i]].tindices[2] = triangles[group.triangles[i]].vindices[2];
@@ -548,7 +599,8 @@ public class Model {
      * the poles. This particular implementation causes the poles along the X
      * axis to be distorted.
      */
-    public void spheremapTexture() {
+    public void spheremapTexture()
+    {
         assert (normals != null);
 
         Group group;
@@ -557,7 +609,8 @@ public class Model {
         numtexcoords = numnormals;
         texcoords = new float[2 * (numtexcoords + 1)];
 
-        for (int i = 1; i <= numnormals; i++) {
+        for (int i = 1; i <= numnormals; i++)
+        {
             z = normals[3 * i + 0];	/*
              * re-arrange for pole distortion
              */
@@ -566,22 +619,28 @@ public class Model {
             r = (float) Math.sqrt((x * x) + (y * y));
             rho = (float) Math.sqrt((r * r) + (z * z));
 
-            if (r == 0.0) {
+            if (r == 0.0)
+            {
                 theta = 0.0f;
                 phi = 0.0f;
-            } else {
-                if (z == 0.0) {
+            } else
+            {
+                if (z == 0.0)
+                {
                     phi = (float) (Math.PI / 2.0);
 
-                } else {
+                } else
+                {
                     phi = (float) Math.acos(z / rho);
 
 
                 }
-                if (y == 0.0) {
+                if (y == 0.0)
+                {
                     theta = (float) (Math.PI / 2.0);
 
-                } else {
+                } else
+                {
                     theta = (float) (Math.asin(y / r) + (Math.PI / 2.0));
 
                 }
@@ -595,8 +654,10 @@ public class Model {
          * go through and put texcoord indices in all the triangles
          */
         group = groups;
-        while (group != null) {
-            for (int i = 0; i < numtriangles; i++) {
+        while (group != null)
+        {
+            for (int i = 0; i < numtriangles; i++)
+            {
                 triangles[group.triangles[i]].tindices[0] = triangles[group.triangles[i]].nindices[0];
                 triangles[group.triangles[i]].tindices[1] = triangles[group.triangles[i]].nindices[1];
                 triangles[group.triangles[i]].tindices[2] = triangles[group.triangles[i]].nindices[2];
@@ -608,7 +669,8 @@ public class Model {
     /**
      * Deletes a model structure (not need to be used).
      */
-    public void delete() {
+    public void delete()
+    {
     }
 
     /**
@@ -617,7 +679,8 @@ public class Model {
      * @param file The file containing the Wavefront model.
      * @throws IOException
      */
-    private void readOBJ(File file) throws IOException {
+    private void readOBJ(File file) throws IOException
+    {
         /*
          * allocate a new model
          */
@@ -652,11 +715,13 @@ public class Model {
         vertices = new float[3 * (numvertices + 1)];
         triangles = new Triangle[numtriangles];
 
-        if (numnormals > 0) {
+        if (numnormals > 0)
+        {
             normals = new float[3 * (numnormals + 1)];
         }
 
-        if (numtexcoords > 0) {
+        if (numtexcoords > 0)
+        {
             texcoords = new float[2 * (numtexcoords + 1)];
         }
 
@@ -672,7 +737,8 @@ public class Model {
      * @param file The file containing the Wavefront model.
      * @throws IOException
      */
-    private void secondPass(File file) throws IOException {
+    private void secondPass(File file) throws IOException
+    {
         int numvertices_aux;		/*
          * number of vertices in model
          */
@@ -705,14 +771,18 @@ public class Model {
         numtriangles_aux = 0;
         material = 0;
 
-        try {
+        try
+        {
             in = new BufferedReader(new FileReader(file));
 
-            while ((line = in.readLine()) != null) {
+            while ((line = in.readLine()) != null)
+            {
                 line = line.trim();
 
-                if (line.length() > 0) {
-                    switch (line.charAt(0)) {
+                if (line.length() > 0)
+                {
+                    switch (line.charAt(0))
+                    {
                         case '#':				/*
                              * comment
                              */
@@ -723,7 +793,8 @@ public class Model {
                         case 'v':				/*
                              * v, vn, vt
                              */
-                            switch (line.charAt(1)) {
+                            switch (line.charAt(1))
+                            {
                                 case ' ':			/*
                                      * vertex
                                      */
@@ -769,9 +840,11 @@ public class Model {
                              */
                             tok = new StringTokenizer(line, " ");
                             tok.nextToken(); //ignores g
-                            if (tok.hasMoreTokens()) {
+                            if (tok.hasMoreTokens())
+                            {
                                 group = findGroup(tok.nextToken());
-                            } else {
+                            } else
+                            {
                                 group = findGroup("_blank_");
                             }
                             group.material = material;
@@ -781,7 +854,8 @@ public class Model {
                              */
                             line = line.trim().substring(1).trim(); //removing f
 
-                            if (line.contains("//")) { /*
+                            if (line.contains("//"))
+                            { /*
                                  * v//n
                                  */
                                 triangles[numtriangles_aux] = new Triangle();
@@ -808,7 +882,8 @@ public class Model {
                                 group.triangles[group.numtriangles++] = numtriangles_aux;
                                 numtriangles_aux++;
 
-                                while (tok.hasMoreTokens()) {
+                                while (tok.hasMoreTokens())
+                                {
                                     triangles[numtriangles_aux] = new Triangle();
                                     tok2 = new StringTokenizer(tok.nextToken(), "/");
                                     v = Integer.parseInt(tok2.nextToken());
@@ -824,12 +899,14 @@ public class Model {
                                     group.triangles[group.numtriangles++] = numtriangles_aux;
                                     numtriangles_aux++;
                                 }
-                            } else {
+                            } else
+                            {
                                 triangles[numtriangles_aux] = new Triangle();
                                 tok = new StringTokenizer(line, " ");
                                 tok2 = new StringTokenizer(tok.nextToken(), "/");
 
-                                if (tok2.countTokens() == 3) { /*
+                                if (tok2.countTokens() == 3)
+                                { /*
                                      * v/t/n
                                      */
                                     v = Integer.parseInt(tok2.nextToken());
@@ -858,7 +935,8 @@ public class Model {
                                     group.triangles[group.numtriangles++] = numtriangles_aux;
                                     numtriangles_aux++;
 
-                                    while (tok.hasMoreTokens()) {
+                                    while (tok.hasMoreTokens())
+                                    {
                                         triangles[numtriangles_aux] = new Triangle();
                                         tok2 = new StringTokenizer(tok.nextToken(), "/");
                                         v = Integer.parseInt(tok2.nextToken());
@@ -877,7 +955,8 @@ public class Model {
                                         group.triangles[group.numtriangles++] = numtriangles_aux;
                                         numtriangles_aux++;
                                     }
-                                } else if (tok2.countTokens() == 2) {  /*
+                                } else if (tok2.countTokens() == 2)
+                                {  /*
                                      * v/t
                                      */
                                     v = Integer.parseInt(tok2.nextToken());
@@ -900,7 +979,8 @@ public class Model {
                                     group.triangles[group.numtriangles++] = numtriangles_aux;
                                     numtriangles_aux++;
 
-                                    while (tok.hasMoreTokens()) {
+                                    while (tok.hasMoreTokens())
+                                    {
                                         triangles[numtriangles_aux] = new Triangle();
                                         tok2 = new StringTokenizer(tok.nextToken(), "/");
                                         v = Integer.parseInt(tok2.nextToken());
@@ -915,7 +995,8 @@ public class Model {
                                         group.triangles[group.numtriangles++] = numtriangles_aux;
                                         numtriangles_aux++;
                                     }
-                                } else {/*
+                                } else
+                                {/*
                                      * v
                                      */
                                     tok = new StringTokenizer(line, " ");
@@ -923,16 +1004,19 @@ public class Model {
                                     triangles[numtriangles_aux].vindices[0] = Integer.parseInt(tok.nextToken());
                                     triangles[numtriangles_aux].vindices[1] = Integer.parseInt(tok.nextToken());
 
-                                    if (tok.hasMoreTokens()) {
+                                    if (tok.hasMoreTokens())
+                                    {
                                         triangles[numtriangles_aux].vindices[2] = Integer.parseInt(tok.nextToken());
-                                    } else {
+                                    } else
+                                    {
                                         triangles[numtriangles_aux].vindices[2] = triangles[numtriangles_aux].vindices[0];
                                     }
 
                                     group.triangles[group.numtriangles++] = numtriangles_aux;
                                     numtriangles_aux++;
 
-                                    while (tok.hasMoreTokens()) {
+                                    while (tok.hasMoreTokens())
+                                    {
                                         triangles[numtriangles_aux] = new Triangle();
                                         v = Integer.parseInt(tok.nextToken());
 
@@ -954,13 +1038,18 @@ public class Model {
                     }
                 }
             }
-        } catch (FileNotFoundException ex) {
+        } catch (FileNotFoundException ex)
+        {
             throw new IOException(ex.getMessage());
-        } finally {
-            if (in != null) {
-                try {
+        } finally
+        {
+            if (in != null)
+            {
+                try
+                {
                     in.close();
-                } catch (IOException ex) {
+                } catch (IOException ex)
+                {
                     Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -973,10 +1062,13 @@ public class Model {
      * @param name Group name.
      * @return Return the first group with the given name.
      */
-    private Group findGroup(String name) {
+    private Group findGroup(String name)
+    {
         Group group = groups;
-        while (group != null) {
-            if (name.toLowerCase().equals(group.name.toLowerCase())) {
+        while (group != null)
+        {
+            if (name.toLowerCase().equals(group.name.toLowerCase()))
+            {
                 break;
             }
             group = group.next;
@@ -989,10 +1081,12 @@ public class Model {
      *
      * @param name Group name.
      */
-    private Group addGroup(String name) {
+    private Group addGroup(String name)
+    {
         Group group = findGroup(name);
 
-        if (group == null) {
+        if (group == null)
+        {
             group = new Group();
             group.name = name;
             group.material = 0;
@@ -1012,13 +1106,16 @@ public class Model {
      * @param name Material name.
      * @return Return the first material with the given name.
      */
-    private int findMaterial(String name) {
+    private int findMaterial(String name)
+    {
         /*
          * XXX doing a linear search on a string key'd list is pretty lame, but
          * it works and is fast enough for now.
          */
-        for (int i = 0; i < nummaterials; i++) {
-            if (materials[i].name.toLowerCase().equals(name.toLowerCase())) {
+        for (int i = 0; i < nummaterials; i++)
+        {
+            if (materials[i].name.toLowerCase().equals(name.toLowerCase()))
+            {
                 return i;
             }
         }
@@ -1039,13 +1136,16 @@ public class Model {
      * @param name Texture name.
      * @return Return the first texture with the given name.
      */
-    private int findTexture(String name) throws IOException {
+    private int findTexture(String name) throws IOException
+    {
         /*
          * XXX doing a linear search on a string key'd list is pretty lame, but
          * it works and is fast enough for now.
          */
-        for (int i = 0; i < numtextures; i++) {
-            if (textures[i].name.toLowerCase().equals(name.toLowerCase())) {
+        for (int i = 0; i < numtextures; i++)
+        {
+            if (textures[i].name.toLowerCase().equals(name.toLowerCase()))
+            {
                 return i;
             }
         }
@@ -1066,7 +1166,8 @@ public class Model {
      * @param file The file containing the Wavefront model.
      * @throws IOException
      */
-    private void firstPass(File file) throws IOException {
+    private void firstPass(File file) throws IOException
+    {
         Group group;			/*
          * current group
          */
@@ -1078,17 +1179,21 @@ public class Model {
          */
         group = addGroup("default");
 
-        try {
+        try
+        {
             in = new BufferedReader(new FileReader(file));
 
             //Capturing the scalar names
             numvertices = numnormals = numtexcoords = numtriangles = 0;
             String line = null;
-            while ((line = in.readLine()) != null) {
+            while ((line = in.readLine()) != null)
+            {
                 line = line.trim();
 
-                if (line.length() > 0) {
-                    switch (line.charAt(0)) {
+                if (line.length() > 0)
+                {
+                    switch (line.charAt(0))
+                    {
                         case '#':				/*
                              * comment
                              */
@@ -1099,7 +1204,8 @@ public class Model {
                         case 'v':				/*
                              * v, vn, vt
                              */
-                            switch (line.charAt(1)) {
+                            switch (line.charAt(1))
+                            {
                                 case ' ':			/*
                                      * vertex
                                      */
@@ -1148,9 +1254,11 @@ public class Model {
                              */
                             tok = new StringTokenizer(line, " ");
                             tok.nextToken();
-                            if (tok.hasMoreTokens()) {
+                            if (tok.hasMoreTokens())
+                            {
                                 group = addGroup(tok.nextToken());
-                            } else {
+                            } else
+                            {
                                 group = addGroup("_blank_");
                             }
                             break;
@@ -1160,10 +1268,12 @@ public class Model {
                             line = line.trim().substring(1).trim(); //removing f
                             tok = new StringTokenizer(line, " ");
 
-                            if (tok.countTokens() > 2) {
+                            if (tok.countTokens() > 2)
+                            {
                                 numtriangles += tok.countTokens() - 2;
                                 group.numtriangles += tok.countTokens() - 2;
-                            } else {
+                            } else
+                            {
                                 numtriangles++;
                                 group.numtriangles++;
                             }
@@ -1176,13 +1286,18 @@ public class Model {
                     }
                 }
             }
-        } catch (FileNotFoundException ex) {
+        } catch (FileNotFoundException ex)
+        {
             throw new IOException(ex.getMessage());
-        } finally {
-            if (in != null) {
-                try {
+        } finally
+        {
+            if (in != null)
+            {
+                try
+                {
                     in.close();
-                } catch (IOException ex) {
+                } catch (IOException ex)
+                {
                     Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -1192,7 +1307,8 @@ public class Model {
          * allocate memory for the triangles in each group
          */
         group = groups;
-        while (group != null) {
+        while (group != null)
+        {
             group.triangles = new int[group.numtriangles];
             group.numtriangles = 0;
             group = group.next;
@@ -1201,7 +1317,8 @@ public class Model {
         /*
          * assuring that there is at least one material available
          */
-        if (nummaterials == 0) {
+        if (nummaterials == 0)
+        {
             nummaterials = 1;
             materials = new Material[nummaterials];
             materials[0] = new Material();
@@ -1228,15 +1345,18 @@ public class Model {
      * @param name The filename of the material file
      * @throws IOException
      */
-    protected void readMTL(String name) throws IOException {
+    protected void readMTL(String name) throws IOException
+    {
         int nummaterials_aux, numtextures_aux;
         File file = new File(pathname.getParent() + "/" + name);
 
-        if (file.exists()) {
+        if (file.exists())
+        {
             BufferedReader in = null;
             StringTokenizer tok = null;
 
-            try {
+            try
+            {
                 in = new BufferedReader(new FileReader(file));
 
                 /*
@@ -1246,10 +1366,13 @@ public class Model {
                 String line = null;
                 nummaterials = 1;
                 numtextures = 0;
-                while ((line = in.readLine()) != null) {
+                while ((line = in.readLine()) != null)
+                {
                     line = line.trim();
-                    if (line.length() > 0) {
-                        switch (line.charAt(0)) {
+                    if (line.length() > 0)
+                    {
+                        switch (line.charAt(0))
+                        {
                             case '#':				/*
                                  * comment
                                  */
@@ -1267,9 +1390,11 @@ public class Model {
                                  */
                                 tok = new StringTokenizer(line, " ");
                                 String token = tok.nextToken();
-                                if (token.equals("map_Kd")) {
+                                if (token.equals("map_Kd"))
+                                {
                                     token = tok.nextToken();
-                                    if (!textures_names.contains(token)) {
+                                    if (!textures_names.contains(token))
+                                    {
                                         textures_names.add(token);
                                         numtextures++;
                                     }
@@ -1283,13 +1408,18 @@ public class Model {
                         }
                     }
                 }
-            } catch (FileNotFoundException ex) {
+            } catch (FileNotFoundException ex)
+            {
                 throw new IOException(ex.getMessage());
-            } finally {
-                if (in != null) {
-                    try {
+            } finally
+            {
+                if (in != null)
+                {
+                    try
+                    {
                         in.close();
-                    } catch (IOException ex) {
+                    } catch (IOException ex)
+                    {
                         Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -1300,7 +1430,8 @@ public class Model {
             /*
              * set the default material
              */
-            for (int i = 0; i < nummaterials; i++) {
+            for (int i = 0; i < nummaterials; i++)
+            {
                 materials[i] = new Material();
                 materials[i].name = null;
                 materials[i].shininess = 65.0f;
@@ -1319,16 +1450,19 @@ public class Model {
             }
             materials[0].name = "default";
 
-            if (numtextures > 0) {
+            if (numtextures > 0)
+            {
                 textures = new Texture[numtextures];
-                for (int i = 0; i < numtextures; i++) {
+                for (int i = 0; i < numtextures; i++)
+                {
                     textures[i] = new Texture();
                     textures[i].name = "";
                     textures[i].texturedata = null;
                 }
             }
 
-            try {
+            try
+            {
                 in = new BufferedReader(new FileReader(file));
 
                 /*
@@ -1337,11 +1471,14 @@ public class Model {
                 nummaterials_aux = 0;
                 numtextures_aux = 0;
                 String line = null;
-                while ((line = in.readLine()) != null) {
+                while ((line = in.readLine()) != null)
+                {
                     line = line.trim();
 
-                    if (line.length() > 0) {
-                        switch (line.charAt(0)) {
+                    if (line.length() > 0)
+                    {
+                        switch (line.charAt(0))
+                        {
                             case '#':				/*
                                  * comment
                                  */
@@ -1358,7 +1495,8 @@ public class Model {
                                 materials[nummaterials_aux].name = tok.nextToken();
                                 break;
                             case 'N':
-                                switch (line.charAt(1)) {
+                                switch (line.charAt(1))
+                                {
                                     case 'i':				/*
                                          * comment
                                          */
@@ -1381,7 +1519,8 @@ public class Model {
                                 break;
 
                             case 'K':
-                                switch (line.charAt(1)) {
+                                switch (line.charAt(1))
+                                {
                                     case 'd':
                                         tok = new StringTokenizer(line, " ");
                                         tok.nextToken(); //ignores Kd
@@ -1416,14 +1555,17 @@ public class Model {
                                 tok = new StringTokenizer(line, " ");
                                 String token = tok.nextToken(); //ignores map_Kd
 
-                                if (token.equals("map_Kd")) {
+                                if (token.equals("map_Kd"))
+                                {
                                     name = tok.nextToken();
 
                                     //loading the texture data
                                     int texindex = findTexture(name);
-                                    if (texindex < 0) {
+                                    if (texindex < 0)
+                                    {
                                         file = new File(pathname.getParent() + "/" + name);
-                                        if (file.exists()) {
+                                        if (file.exists())
+                                        {
                                             BufferedImage image = ImageIO.read(file);
                                             ImageUtil.flipImageVertically(image); //vertically flip the image
                                             textures[numtextures_aux].name = name;
@@ -1445,18 +1587,24 @@ public class Model {
                         }
                     }
                 }
-            } catch (FileNotFoundException ex) {
+            } catch (FileNotFoundException ex)
+            {
                 throw new IOException(ex.getMessage());
-            } finally {
-                if (in != null) {
-                    try {
+            } finally
+            {
+                if (in != null)
+                {
+                    try
+                    {
                         in.close();
-                    } catch (IOException ex) {
+                    } catch (IOException ex)
+                    {
                         Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
-        } else {
+        } else
+        {
             Logger.getLogger(Model.class.getName()).log(Level.WARNING,
                     "readMTL() warning: mtl file not found ({0})", file.getName());
         }
@@ -1472,7 +1620,8 @@ public class Model {
      * write vertex normals WF_TEXTURE - write texture coords WF_FLAT and
      * WF_SMOOTH should not both be specified.
      */
-    public void writeOBJ(String filename, int mode) {
+    public void writeOBJ(String filename, int mode)
+    {
     }
 
     /**
@@ -1484,7 +1633,8 @@ public class Model {
      * write vertex normals WF_TEXTURE - write texture coords WF_FLAT and
      * WF_SMOOTH should not both be specified.
      */
-    private void draw(GLAutoDrawable gLAutoDrawable, int mode) {
+    private void draw(GLAutoDrawable gLAutoDrawable, int mode)
+    {
         assert (vertices != null);
 
         GL gl = gLAutoDrawable.getGL();
@@ -1496,65 +1646,76 @@ public class Model {
         /*
          * do a bit of warning
          */
-        if ((mode & WF_FLAT) > 0 && facetnorms == null) {
+        if ((mode & WF_FLAT) > 0 && facetnorms == null)
+        {
             Logger.getLogger(Model.class.getName()).log(Level.WARNING,
                     "draw() warning: flat render mode requested "
                     + "with no facet normals defined ({0})", pathname.getName());
             mode &= ~WF_FLAT;
         }
 
-        if ((mode & WF_SMOOTH) > 0 && normals == null) {
+        if ((mode & WF_SMOOTH) > 0 && normals == null)
+        {
             Logger.getLogger(Model.class.getName()).log(Level.WARNING,
                     "draw() warning: smooth render mode requested "
                     + "with no normals defined ({0})", pathname.getName());
             mode &= ~WF_SMOOTH;
         }
 
-        if ((mode & WF_TEXTURE) > 0 && texcoords == null) {
+        if ((mode & WF_TEXTURE) > 0 && texcoords == null)
+        {
             Logger.getLogger(Model.class.getName()).log(Level.WARNING,
                     "draw() warning: texture render mode requested "
                     + "with no texture coordinates defined ({0})", pathname.getName());
             mode &= ~WF_TEXTURE;
         }
 
-        if ((mode & WF_FLAT) > 0 && (mode & WF_SMOOTH) > 0) {
+        if ((mode & WF_FLAT) > 0 && (mode & WF_SMOOTH) > 0)
+        {
             Logger.getLogger(Model.class.getName()).log(Level.WARNING,
                     "draw() warning: flat render mode requested "
                     + "and smooth render mode requested - ({0})", pathname.getName());
             mode &= ~WF_FLAT;
         }
 
-        if ((mode & WF_COLOR) > 0 && materials == null) {
+        if ((mode & WF_COLOR) > 0 && materials == null)
+        {
             Logger.getLogger(Model.class.getName()).log(Level.WARNING,
                     "draw() warning: color render mode requested "
                     + "with no materials defined ({0})", pathname.getName());
             mode &= ~WF_COLOR;
         }
 
-        if ((mode & WF_MATERIAL) > 0 && materials == null) {
+        if ((mode & WF_MATERIAL) > 0 && materials == null)
+        {
             Logger.getLogger(Model.class.getName()).log(Level.WARNING,
                     "draw() warning: material render mode requested "
                     + "with no materials defined ({0})", pathname.getName());
             mode &= ~WF_MATERIAL;
         }
 
-        if ((mode & WF_COLOR) > 0 && (mode & WF_MATERIAL) > 0) {
+        if ((mode & WF_COLOR) > 0 && (mode & WF_MATERIAL) > 0)
+        {
             Logger.getLogger(Model.class.getName()).log(Level.WARNING,
                     "draw() warning: color and material render mode requested "
                     + "using only material mode ({0})", pathname.getName());
             mode &= ~WF_COLOR;
         }
 
-        if ((mode & WF_COLOR) > 0) {
+        if ((mode & WF_COLOR) > 0)
+        {
             gl.glEnable(GL.GL_COLOR_MATERIAL);
-        } else if ((mode & WF_MATERIAL) > 0) {
+        } else if ((mode & WF_MATERIAL) > 0)
+        {
             gl.glDisable(GL.GL_COLOR_MATERIAL);
         }
 
         //activating tne texture
-        if ((mode & WF_TEXTURE) > 0) {
+        if ((mode & WF_TEXTURE) > 0)
+        {
             gl.glEnable(GL.GL_TEXTURE_2D);
-        } else {
+        } else
+        {
             gl.glDisable(GL.GL_TEXTURE_2D);
         }
 
@@ -1566,11 +1727,14 @@ public class Model {
          */
 
         group = groups;
-        while (group != null) {
-            if ((mode & WF_TEXTURE) > 0) {
+        while (group != null)
+        {
+            if ((mode & WF_TEXTURE) > 0)
+            {
                 material = materials[group.material];
 
-                if (material.texindex >= 0) {
+                if (material.texindex >= 0)
+                {
                     TextureData texturedata = textures[material.texindex].texturedata;
                     com.sun.opengl.util.texture.Texture texture = TextureIO.newTexture(texturedata);
                     texture.setTexParameteri(GL.GL_TEXTURE_MIN_FILTER, GL.GL_LINEAR);
@@ -1579,7 +1743,8 @@ public class Model {
                 }
             }
 
-            if ((mode & WF_MATERIAL) > 0) {
+            if ((mode & WF_MATERIAL) > 0)
+            {
                 material = materials[group.material];
                 gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL.GL_AMBIENT, material.ambient, 0);
                 gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL.GL_DIFFUSE, material.diffuse, 0);
@@ -1587,47 +1752,59 @@ public class Model {
                 gl.glMaterialf(GL.GL_FRONT_AND_BACK, GL.GL_SHININESS, material.shininess);
             }
 
-            if ((mode & WF_COLOR) > 0) {
+            if ((mode & WF_COLOR) > 0)
+            {
                 material = materials[group.material];
                 gl.glColor3fv(material.diffuse, 0);
             }
 
             gl.glBegin(GL.GL_TRIANGLES);
-            for (int i = 0; i < group.numtriangles; i++) {
+            for (int i = 0; i < group.numtriangles; i++)
+            {
                 triangle = triangles[group.triangles[i]];
 
-                if ((mode & WF_FLAT) > 0) {
+                if ((mode & WF_FLAT) > 0)
+                {
                     gl.glNormal3fv(facetnorms, (3 * triangle.findex));
                 }
 
-                if ((mode & WF_SMOOTH) > 0) {
+                if ((mode & WF_SMOOTH) > 0)
+                {
                     gl.glNormal3fv(normals, (3 * triangle.nindices[0]));
                 }
 
-                if ((mode & WF_TEXTURE) > 0) {
-                    if ((2 * triangle.tindices[0]) < texcoords.length) {
+                if ((mode & WF_TEXTURE) > 0)
+                {
+                    if ((2 * triangle.tindices[0]) < texcoords.length)
+                    {
                         gl.glTexCoord2fv(texcoords, (2 * triangle.tindices[0]));
                     }
                 }
                 gl.glVertex3fv(vertices, (3 * triangle.vindices[0]));
 
-                if ((mode & WF_SMOOTH) > 0) {
+                if ((mode & WF_SMOOTH) > 0)
+                {
                     gl.glNormal3fv(normals, (3 * triangle.nindices[1]));
                 }
 
-                if ((mode & WF_TEXTURE) > 0) {
-                    if ((2 * triangle.tindices[1]) < texcoords.length) {
+                if ((mode & WF_TEXTURE) > 0)
+                {
+                    if ((2 * triangle.tindices[1]) < texcoords.length)
+                    {
                         gl.glTexCoord2fv(texcoords, (2 * triangle.tindices[1]));
                     }
                 }
                 gl.glVertex3fv(vertices, (3 * triangle.vindices[1]));
 
-                if ((mode & WF_SMOOTH) > 0) {
+                if ((mode & WF_SMOOTH) > 0)
+                {
                     gl.glNormal3fv(normals, (3 * triangle.nindices[2]));
                 }
 
-                if ((mode & WF_TEXTURE) > 0) {
-                    if ((2 * triangle.tindices[2]) < texcoords.length) {
+                if ((mode & WF_TEXTURE) > 0)
+                {
+                    if ((2 * triangle.tindices[2]) < texcoords.length)
+                    {
                         gl.glTexCoord2fv(texcoords, (2 * triangle.tindices[2]));
                     }
                 }
@@ -1646,11 +1823,14 @@ public class Model {
      *
      * @param gLAutoDrawable The OpenGL context to draw.
      */
-    public void draw(GLAutoDrawable gLAutoDrawable) {
-        if (objectid != -1) {
+    public void draw(GLAutoDrawable gLAutoDrawable)
+    {
+        if (objectid != -1)
+        {
             GL gl = gLAutoDrawable.getGL();
             gl.glCallList(objectid);
-        } else {
+        } else
+        {
             Logger.getLogger(Model.class.getName()).log(Level.SEVERE,
                     "draw() error: method compile() should be previously "
                     + "called to create the proper disply list.");
@@ -1667,7 +1847,8 @@ public class Model {
      * write vertex normals WF_TEXTURE - write texture coords WF_FLAT and
      * WF_SMOOTH should not both be specified.
      */
-    public void compile(GLAutoDrawable gLAutoDrawable, int mode) {
+    public void compile(GLAutoDrawable gLAutoDrawable, int mode)
+    {
         GL gl = gLAutoDrawable.getGL();
         objectid = gl.glGenLists(1);
         gl.glNewList(objectid, GL.GL_COMPILE);
@@ -1683,7 +1864,8 @@ public class Model {
      * start for a unitized model).
      * @return
      */
-    public int weld(float epsilon) {
+    public int weld(float epsilon)
+    {
         return 0;
     }
 
@@ -1693,7 +1875,8 @@ public class Model {
      * @param complete Indicates if the it should print the complete information
      * about the model or not.
      */
-    public void dump(boolean complete) {
+    public void dump(boolean complete)
+    {
         Group group;
         Material material;
 
@@ -1704,9 +1887,11 @@ public class Model {
         System.out.println("Number triangles: " + numtriangles);
         System.out.println("Number vertices: " + numvertices);
 
-        if (complete) {
+        if (complete)
+        {
             group = groups;
-            while (group != null) {
+            while (group != null)
+            {
                 System.out.println("---");
                 System.out.println("Group: " + group.name);
                 System.out.println("Number triangles: " + group.numtriangles);
@@ -1720,7 +1905,8 @@ public class Model {
                         + material.specular[1] + "," + material.specular[2]);
                 System.out.println("Ns: " + material.shininess);
 
-                if (material.texindex >= 0) {
+                if (material.texindex >= 0)
+                {
                     System.out.println("map_Kd: " + textures[material.texindex].name);
                 }
 
@@ -1740,7 +1926,8 @@ public class Model {
      * successvely).
      * @return
      */
-    private float dot(float[] u, int index_u, float[] v, int index_v) {
+    private float dot(float[] u, int index_u, float[] v, int index_v)
+    {
         assert (u != null);
         assert (v != null);
         return u[index_u] * v[index_v] + u[index_u + 1] * v[index_v + 1] + u[index_u + 2] * v[index_v + 2];
@@ -1755,7 +1942,8 @@ public class Model {
      * @param index_n Initial index of the new vector (it writes 3 positions
      * successively).
      */
-    private void cross(float[] u, float[] v, float[] n, int index_n) {
+    private void cross(float[] u, float[] v, float[] n, int index_n)
+    {
         assert (u != null);
         assert (v != null);
         assert (n != null);
@@ -1772,7 +1960,8 @@ public class Model {
      * @param index Initial index of the vector (it writes 3 positions
      * successively).
      */
-    private void normalize(float[] v, int index) {
+    private void normalize(float[] v, int index)
+    {
         assert (v != null);
         float l = (float) Math.sqrt(v[index] * v[index] + v[1 + index] * v[1 + index] + v[2 + index] * v[2 + index]);
         v[0 + index] /= l;
@@ -1783,7 +1972,8 @@ public class Model {
     /**
      * Class that defines a material in a model.
      */
-    protected class Material {
+    protected class Material
+    {
 
         String name;				// name of material
         float diffuse[] = new float[4];		// diffuse component
@@ -1796,7 +1986,8 @@ public class Model {
     /**
      * Class that defines a triangle in a model.
      */
-    protected class Triangle {
+    protected class Triangle
+    {
 
         int vindices[] = new int[3];	// array of triangle vertex indices
         int nindices[] = new int[3];	// array of triangle normal indices
@@ -1807,7 +1998,8 @@ public class Model {
     /**
      * Class that defines a group in a model.
      */
-    protected class Group {
+    protected class Group
+    {
 
         String name;		// name of this group
         int numtriangles;	// number of triangles in this group
@@ -1819,7 +2011,8 @@ public class Model {
     /**
      * Class that defines a texture in a model.
      */
-    protected class Texture {
+    protected class Texture
+    {
 
         String name;
         TextureData texturedata; //texture
@@ -1828,13 +2021,13 @@ public class Model {
     /**
      * General purpose node
      */
-    protected class Node {
+    protected class Node
+    {
 
         int index;
         boolean averaged;
         Node next;
     }
-
     /**
      * Object id identifying the display list.
      */

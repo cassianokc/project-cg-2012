@@ -1,7 +1,6 @@
 package br.usp.icmc.projectcg2012.view;
 
-import br.usp.icmc.projectcg2012.models.SkyboxPiece;
-import br.usp.icmc.projectcg2012.models.Model;
+import br.usp.icmc.projectcg2012.models.*;
 import br.usp.icmc.projectcg2012.engine.InputDevice;
 import br.usp.icmc.projectcg2012.main.Main;
 import com.sun.opengl.util.GLUT;
@@ -25,7 +24,7 @@ public class Renderer implements GLEventListener
     private float posy;  // camera current y position
     private float posz;  // camera current z position
     private float ang_senoide;
-    private float raio;
+    private float radius;
     /*
      * Array containing all normal models.
      */
@@ -47,15 +46,15 @@ public class Renderer implements GLEventListener
     public Renderer()
     {
         this.normalModels = new ArrayList<Model>();
-        this.animatedModels = new ArrayList<Model>();
-        this.skyboxModels = new ArrayList<SkyboxPiece>();
+        this.animatedModels = new ArrayList<AnimatedModel>();
+        this.skyboxModels = new ArrayList<SkyboxModel>();
         this.alpha = 0f;
         this.beta = 0f;
         posx = 1f;
         posy = 1.8f;
         posz = 1f;
         ang_senoide = 0.0f;
-        raio = 100000.0f;
+        radius = 100000.0f;
         input = new InputDevice(Main.getCanvas(), this);
     }
 
@@ -82,17 +81,18 @@ public class Renderer implements GLEventListener
 
     public void display(GLAutoDrawable drawable)
     {
-        //função de desenho
         GL gl = drawable.getGL();
         Iterator it;
+        SkyboxModel skyboxModel;
+        AnimatedModel animatedModel;
         Model model;
         GLU glu = new GLU();
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
         gl.glMatrixMode(GL.GL_MODELVIEW);
         gl.glLoadIdentity();
-        
-        glu.gluLookAt(posx, 1.8f + Math.sin(ang_senoide)*0.06f, posz, //camera position
-                (raio)*(Math.sin(alpha))+(posx)*(Math.sin(alpha)), raio*beta + 1.8 + posy + Math.sin(ang_senoide)*0.06f, (-raio)*(Math.cos(alpha))+(posz)*(Math.cos(alpha)), //vector to where the camera points
+
+        glu.gluLookAt(posx, 1.8f + Math.sin(ang_senoide) * 0.06f, posz, //camera position
+                (radius) * (Math.sin(alpha)) + (posx) * (Math.sin(alpha)), radius * beta + 1.8 + posy + Math.sin(ang_senoide) * 0.06f, (-radius) * (Math.cos(alpha)) + (posz) * (Math.cos(alpha)), //vector to where the camera points
                 0.0, 1.0, 0.0); // viewup vector
 
         gl.glMatrixMode(GL.GL_PROJECTION);
@@ -104,8 +104,8 @@ public class Renderer implements GLEventListener
         it = this.skyboxModels.iterator();
         while (it.hasNext())
         {
-            model = (Model) it.next();
-            model.draw(drawable);
+            skyboxModel = (SkyboxModel) it.next();
+            skyboxModel.draw(drawable);
         }
         it = this.normalModels.iterator();
         while (it.hasNext())
@@ -116,18 +116,9 @@ public class Renderer implements GLEventListener
         it = this.animatedModels.iterator();
         while (it.hasNext())
         {
-            model = (Model) it.next();
-            model.draw(drawable);
+            animatedModel = (AnimatedModel) it.next();
+            animatedModel.draw(drawable);
         }
-//        gl.glColor3f(0.5f, 0.5f, 0.5f);
-//        gl.glBegin(gl.GL_QUADS);
-//        gl.glVertex3d(1.0, 1.0, 1.0);
-//        gl.glVertex3d(5.0, 5.0, 5.0);
-//        gl.glVertex3d(1.0, 1.0, 5.0);
-//        gl.glVertex3d(5.0, 5.0, 1.0);
-//              
-//        
-//        gl.glEnd();
         gl.glFlush();
 
 
@@ -158,12 +149,11 @@ public class Renderer implements GLEventListener
             -posx - (float) Math.cos(alpha), -posy - beta, -posz - (float) Math.sin(alpha), 1.0f
         };
 
-        // Define os parametros da luz de numero 0
         gl.glLightfv(GL.GL_LIGHT0, GL.GL_AMBIENT, ambient, 0);
         gl.glLightfv(GL.GL_LIGHT0, GL.GL_DIFFUSE, diffuse, 0);
         gl.glLightfv(GL.GL_LIGHT0, GL.GL_SPECULAR, specular, 0);
         gl.glLightfv(GL.GL_LIGHT0, GL.GL_POSITION, position, 0);
-        
+
     }
 
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height)
@@ -179,64 +169,64 @@ public class Renderer implements GLEventListener
     {
         try
         {
-            SkyboxPiece model = new SkyboxPiece(new File("./project-cg-2012/floortex.obj"));
+            SkyboxModel model = new SkyboxModel(new File("./project-cg-2012/floortex.obj"));
             model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
             this.skyboxModels.add(model);
-            model = new SkyboxPiece(new File("./project-cg-2012/ceillingtex.obj"));
+            model = new SkyboxModel(new File("./project-cg-2012/ceillingtex.obj"));
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
-            model = new SkyboxPiece(new File("./project-cg-2012/wall1tex.obj"));
+            model = new SkyboxModel(new File("./project-cg-2012/wall1tex.obj"));
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
-            model = new SkyboxPiece(new File("./project-cg-2012/wall2tex.obj"));
+            model = new SkyboxModel(new File("./project-cg-2012/wall2tex.obj"));
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
-            model = new SkyboxPiece(new File("./project-cg-2012/wall3tex.obj"));
+            model = new SkyboxModel(new File("./project-cg-2012/wall3tex.obj"));
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
-            model = new SkyboxPiece(new File("./project-cg-2012/wall4tex.obj"));
+            model = new SkyboxModel(new File("./project-cg-2012/wall4tex.obj"));
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
-            model = new SkyboxPiece(new File("./project-cg-2012/wall5.obj"));
+            model = new SkyboxModel(new File("./project-cg-2012/wall5.obj"));
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxPiece(new File("./project-cg-2012/wall6.obj"));
+            model = new SkyboxModel(new File("./project-cg-2012/wall6.obj"));
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxPiece(new File("./project-cg-2012/wall7.obj"));
+            model = new SkyboxModel(new File("./project-cg-2012/wall7.obj"));
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxPiece(new File("./project-cg-2012/wall8.obj"));
+            model = new SkyboxModel(new File("./project-cg-2012/wall8.obj"));
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxPiece(new File("./project-cg-2012/wall9.obj"));
+            model = new SkyboxModel(new File("./project-cg-2012/wall9.obj"));
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxPiece(new File("./project-cg-2012/wall10.obj"));
+            model = new SkyboxModel(new File("./project-cg-2012/wall10.obj"));
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxPiece(new File("./project-cg-2012/wall11.obj"));
+            model = new SkyboxModel(new File("./project-cg-2012/wall11.obj"));
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxPiece(new File("./project-cg-2012/wall12.obj"));
+            model = new SkyboxModel(new File("./project-cg-2012/wall12.obj"));
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxPiece(new File("./project-cg-2012/wall13.obj"));
+            model = new SkyboxModel(new File("./project-cg-2012/wall13.obj"));
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxPiece(new File("./project-cg-2012/wall14.obj"));
+            model = new SkyboxModel(new File("./project-cg-2012/wall14.obj"));
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxPiece(new File("./project-cg-2012/wall15.obj"));
+            model = new SkyboxModel(new File("./project-cg-2012/wall15.obj"));
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxPiece(new File("./project-cg-2012/wall16.obj"));
+            model = new SkyboxModel(new File("./project-cg-2012/wall16.obj"));
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxPiece(new File("./project-cg-2012/wall17.obj"));
+            model = new SkyboxModel(new File("./project-cg-2012/wall17.obj"));
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxPiece(new File("./project-cg-2012/wall18.obj"));
+            model = new SkyboxModel(new File("./project-cg-2012/wall18.obj"));
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL);
 
@@ -262,6 +252,10 @@ public class Renderer implements GLEventListener
         }
     }
 
+    public void loadAnimatedModels(GLAutoDrawable drawable)
+    {
+    }
+
     private void shader(GLAutoDrawable drawable)
     {
         GL gl = drawable.getGL();
@@ -282,7 +276,7 @@ public class Renderer implements GLEventListener
         gl.glLinkProgram(shaderprogram);
         gl.glValidateProgram(shaderprogram);
         gl.glUseProgram(shaderprogram);
-       
+
 
 
     }
@@ -291,7 +285,7 @@ public class Renderer implements GLEventListener
     {
         try
         {
-            
+
             BufferedReader brv = new BufferedReader(new FileReader(shadername));
 
             StringBuilder buffer = new StringBuilder();
@@ -301,67 +295,89 @@ public class Renderer implements GLEventListener
                 buffer.append(line).append("\r\n");
             }
             brv.close();
-            return new String[]{buffer.toString()};
-        }
-        catch (IOException ex)
+            return new String[]
+                    {
+                        buffer.toString()
+                    };
+        } catch (IOException ex)
         {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-public void loadAnimatedModels(GLAutoDrawable drawable) {
 
-    }
-
-    public void setAlpha(float alpha) {
+    public void setAlpha(float alpha)
+    {
         this.alpha = alpha;
     }
 
-    public void setBeta(float beta) {
+    public void setBeta(float beta)
+    {
         this.beta = beta;
     }
 
-    public void setPosx(float posx) {
+    public void setPosx(float posx)
+    {
         this.posx = posx;
     }
 
-    public void setPosy(float posy) {
+    public void setPosy(float posy)
+    {
         this.posy = posy;
     }
 
-    public void setPosz(float posz) {
+    public void setPosz(float posz)
+    {
         this.posz = posz;
     }
-    
-    public void setAngSenoide(float ang_senoide) {
+
+    public void setAngSenoide(float ang_senoide)
+    {
         this.ang_senoide = ang_senoide;
     }
 
-    public float getAlpha() {
+    public float getAlpha()
+    {
         return this.alpha;
     }
 
-    public float getBeta() {
+    public float getBeta()
+    {
         return this.beta;
     }
 
-    public InputDevice getInput() {
+    public InputDevice getInput()
+    {
         return this.input;
     }
 
-    public float getPosx() {
+    public float getPosx()
+    {
         return this.posx;
     }
 
-    public float getPosy() {
+    public float getPosy()
+    {
         return this.posy;
     }
 
-    public float getPosz() {
+    public float getPosz()
+    {
         return this.posz;
     }
-    
-    public float getAngSenoide() {
+
+    public float getAngSenoide()
+    {
         return this.ang_senoide;
+    }
+
+    public ArrayList getAnimatedModels()
+    {
+        return animatedModels;
+    }
+
+    public ArrayList getSkyboxModels()
+    {
+        return skyboxModels;
     }
 }
