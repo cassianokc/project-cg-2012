@@ -62,11 +62,9 @@ public class Renderer implements GLEventListener
     public void init(GLAutoDrawable drawable)
     {
         GL gl = drawable.getGL();
+        drawable.setGL(new DebugGL(drawable.getGL()));
         gl.glEnable(GL.GL_LIGHTING);
         gl.glEnable(GL.GL_LIGHT0);
-        gl.glEnable(GL.GL_DEPTH_TEST);
-//        gl.glEnable(GL.GL_SMOOTH);
-        //lighting(drawable);
         shader(drawable);
         /*
          * Loads and compiles, adding to the proper array list all models.
@@ -76,7 +74,6 @@ public class Renderer implements GLEventListener
         loadAnimatedModels(drawable);
 
         gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f); // Defines backgroundColor
-        gl.glEnable(GL.GL_DEPTH_TEST);
         input.hideCursor(Main.getCanvas());
         input.centerMouse(Main.getCanvas());
 
@@ -141,7 +138,7 @@ public class Renderer implements GLEventListener
 
         float[] ambient =
         {
-            0.3f, 0.3f, 0.3f, 1.0f
+            0.0f, 0.0f, 0.0f, 1.0f
         };
         float[] diffuse = new float[]
         {
@@ -166,7 +163,7 @@ public class Renderer implements GLEventListener
         gl.glLightfv(GL.GL_LIGHT0, GL.GL_SPECULAR, specular, 0);
         gl.glLightfv(GL.GL_LIGHT0, GL.GL_POSITION, position, 0);
         gl.glLightfv(GL.GL_LIGHT0, GL.GL_SPOT_DIRECTION, direction, 0); //vetor direção
-        gl.glLightf(GL.GL_LIGHT0, GL.GL_SPOT_CUTOFF, 60.0f); //espalhamento angular
+        gl.glLightf(GL.GL_LIGHT0, GL.GL_SPOT_CUTOFF, 10.0f); //espalhamento angular
         gl.glLightf(GL.GL_LIGHT0, GL.GL_SPOT_EXPONENT, 0.5f); //atenuação angular
     }
 
