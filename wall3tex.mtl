@@ -1,12 +1,12 @@
 # Blender MTL File: 'walltex.blend'
 # Material Count: 1
-newmtl wall_wall1.jpg
+newmtl wall_wall3tex.jpg
 Ns 35.294118
 Ka 0.000000 0.000000 0.000000
 Kd 0.183555 0.192000 0.140164
 Ks 0.477348 0.509639 0.352760
 Ni 1.000000
 d 1.000000
-map_Kd wall1.jpg
+map_Kd wall3tex.jpg
 
 

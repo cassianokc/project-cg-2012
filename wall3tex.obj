@@ -1,0 +1,15 @@
+# Blender v2.62 (sub 0) OBJ File: 'walltex.blend'
+# www.blender.org
+mtllib wall3tex.mtl
+o Mesh_wall3
+v 10.850000 0.000000 0.000000
+v 10.850000 -0.000001 6.590000
+v 10.850000 2.999999 6.590001
+v 10.850000 3.000000 0.000000
+vt 0.993306 0.000000
+vt 0.992124 0.996137
+vt -0.001182 0.999184
+vt 0.000000 0.003047
+usemtl wall_wall3tex.jpg
+s off
+f 1/1 2/2 3/3 4/4

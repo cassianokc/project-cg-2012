@@ -5,8 +5,7 @@ import br.usp.icmc.projectcg2012.models.Model;
 import br.usp.icmc.projectcg2012.engine.InputDevice;
 import br.usp.icmc.projectcg2012.main.Main;
 import com.sun.opengl.util.GLUT;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.logging.Level;
@@ -16,7 +15,8 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 
-public class Renderer implements GLEventListener {
+public class Renderer implements GLEventListener
+{
 
     private float alpha;  // camera current degree of vision, right left
     private float beta;  // camera current degree of vision, up and down
@@ -41,7 +41,8 @@ public class Renderer implements GLEventListener {
     private ArrayList skyboxModels;
     private InputDevice input;
 
-    public Renderer() {
+    public Renderer()
+    {
         this.normalModels = new ArrayList<Model>();
         this.animatedModels = new ArrayList<Model>();
         this.skyboxModels = new ArrayList<SkyboxPiece>();
@@ -53,13 +54,15 @@ public class Renderer implements GLEventListener {
         input = new InputDevice(Main.getCanvas(), this);
     }
 
-    public void init(GLAutoDrawable drawable) {
+    public void init(GLAutoDrawable drawable)
+    {
         GL gl = drawable.getGL();
         gl.glEnable(GL.GL_LIGHTING);
         gl.glEnable(GL.GL_LIGHT0);
         gl.glEnable(GL.GL_DEPTH_TEST);
-        gl.glShadeModel(GL.GL_SMOOTH);
-        lighting(drawable);
+//        gl.glEnable(GL.GL_SMOOTH);
+        //lighting(drawable);
+        //shader(drawable);
         /*
          * Loads and compiles, adding to the proper array list all models.
          */
@@ -69,13 +72,13 @@ public class Renderer implements GLEventListener {
 
         gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f); // Defines backgroundColor
         gl.glEnable(GL.GL_DEPTH_TEST);
-        gl.glShadeModel(GL.GL_SMOOTH);
         input.hideCursor(Main.getCanvas());
         input.centerMouse(Main.getCanvas());
 
     }
 
-    public void display(GLAutoDrawable drawable) {
+    public void display(GLAutoDrawable drawable)
+    {
         //função de desenho
         GL gl = drawable.getGL();
         Iterator it;
@@ -95,67 +98,103 @@ public class Renderer implements GLEventListener {
          * Draws the models.
          */
         it = this.skyboxModels.iterator();
-        while (it.hasNext()) {
+        while (it.hasNext())
+        {
             model = (Model) it.next();
             model.draw(drawable);
         }
         it = this.normalModels.iterator();
-        while (it.hasNext()) {
+        while (it.hasNext())
+        {
             model = (Model) it.next();
             model.draw(drawable);
         }
         it = this.animatedModels.iterator();
-        while (it.hasNext()) {
+        while (it.hasNext())
+        {
             model = (Model) it.next();
             model.draw(drawable);
         }
+//        gl.glColor3f(0.5f, 0.5f, 0.5f);
+//        gl.glBegin(gl.GL_QUADS);
+//        gl.glVertex3d(1.0, 1.0, 1.0);
+//        gl.glVertex3d(5.0, 5.0, 5.0);
+//        gl.glVertex3d(1.0, 1.0, 5.0);
+//        gl.glVertex3d(5.0, 5.0, 1.0);
+//              
+//        
+//        gl.glEnd();
         gl.glFlush();
 
 
     }
 
-    private void lighting(GLAutoDrawable drawable) {
+    private void lighting(GLAutoDrawable drawable)
+    {
         GL gl = drawable.getGL();
 
-    float[] ambient = {0.3f, 0.3f, 0.3f, 1.0f};
-        float[] diffuse = new float[]{0.75f, 0.75f, 0.75f, 1.0f};
-        float[] specular = new float[]{0.75f, 0.75f, 0.75f, 1.0f};
-        float[] position = new float[]{posx, posy+3, posz, 1.0f};
+        float[] ambient =
+        {
+            0.3f, 0.3f, 0.3f, 1.0f
+        };
+        float[] diffuse = new float[]
+        {
+            0.75f, 0.75f, 0.75f, 1.0f
+        };
+        float[] specular = new float[]
+        {
+            0.75f, 0.75f, 0.75f, 1.0f
+        };
+        float[] position = new float[]
+        {
+            posx, posy + 3, posz, 1.0f
+        };
+        float[] direction = new float[]
+        {
+            -posx - (float) Math.cos(alpha), -posy - beta, -posz - (float) Math.sin(alpha), 1.0f
+        };
 
         // Define os parametros da luz de numero 0
         gl.glLightfv(GL.GL_LIGHT0, GL.GL_AMBIENT, ambient, 0);
         gl.glLightfv(GL.GL_LIGHT0, GL.GL_DIFFUSE, diffuse, 0);
         gl.glLightfv(GL.GL_LIGHT0, GL.GL_SPECULAR, specular, 0);
         gl.glLightfv(GL.GL_LIGHT0, GL.GL_POSITION, position, 0);
+        gl.glLightfv(GL.GL_LIGHT0, GL.GL_SPOT_DIRECTION, direction, 0); //vetor direção
+        gl.glLightf(GL.GL_LIGHT0, GL.GL_SPOT_CUTOFF, 60.0f); //espalhamento angular
+        gl.glLightf(GL.GL_LIGHT0, GL.GL_SPOT_EXPONENT, 0.5f); //atenuação angular
     }
 
-    public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
+    public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height)
+    {
     }
 
-    public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
+    public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged)
+    {
         //função para mudança no display
     }
 
-    public void loadSkyboxModels(GLAutoDrawable drawable) {
-        try {
+    public void loadSkyboxModels(GLAutoDrawable drawable)
+    {
+        try
+        {
             SkyboxPiece model = new SkyboxPiece(new File("./project-cg-2012/floortex.obj"));
             model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
             this.skyboxModels.add(model);
-            model = new SkyboxPiece(new File("./project-cg-2012/ceilling.obj"));
+            model = new SkyboxPiece(new File("./project-cg-2012/ceillingtex.obj"));
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
             model = new SkyboxPiece(new File("./project-cg-2012/wall1tex.obj"));
-            this.skyboxModels.add(model);   
+            this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
-            model = new SkyboxPiece(new File("./project-cg-2012/wall2.obj"));
+            model = new SkyboxPiece(new File("./project-cg-2012/wall2tex.obj"));
             this.skyboxModels.add(model);
-            model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxPiece(new File("./project-cg-2012/wall3.obj"));
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new SkyboxPiece(new File("./project-cg-2012/wall3tex.obj"));
             this.skyboxModels.add(model);
-            model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxPiece(new File("./project-cg-2012/wall4.obj"));
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new SkyboxPiece(new File("./project-cg-2012/wall4tex.obj"));
             this.skyboxModels.add(model);
-            model.compile(drawable, Model.WF_MATERIAL);
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
             model = new SkyboxPiece(new File("./project-cg-2012/wall5.obj"));
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL);
@@ -201,23 +240,74 @@ public class Renderer implements GLEventListener {
 
 
 
-        } catch (IOException ex) {
+        } catch (IOException ex)
+        {
             Logger.getLogger(Renderer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void loadNormalModels(GLAutoDrawable drawable) {
-        try {
+    public void loadNormalModels(GLAutoDrawable drawable)
+    {
+        try
+        {
 
             Model model = new Model(new File("./project-cg-2012/top.obj"));
             this.normalModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL);
-        } catch (IOException ex) {
+        } catch (IOException ex)
+        {
             Logger.getLogger(Renderer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void loadAnimatedModels(GLAutoDrawable drawable) {
+    private void shader(GLAutoDrawable drawable)
+    {
+        GL gl = drawable.getGL();
+        int v = gl.glCreateShader(GL.GL_VERTEX_SHADER);
+        int f = gl.glCreateShader(GL.GL_FRAGMENT_SHADER);
+
+        String[] vsrc = readShader("./project-cg-2012/shaders/vertex_shader");
+        gl.glShaderSource(v, 1, vsrc, null, 0);
+        gl.glCompileShader(v);
+
+        String[] fsrc = readShader("./project-cg-2012/shaders/fragment_shader");
+        gl.glShaderSource(f, 1, fsrc, null, 0);
+        gl.glCompileShader(f);
+
+        int shaderprogram = gl.glCreateProgram();
+        gl.glAttachShader(shaderprogram, v);
+        gl.glAttachShader(shaderprogram, f);
+        gl.glLinkProgram(shaderprogram);
+        gl.glValidateProgram(shaderprogram);
+        gl.glUseProgram(shaderprogram);
+       
+
+
+    }
+
+    private String[] readShader(String shadername)
+    {
+        try
+        {
+            
+            BufferedReader brv = new BufferedReader(new FileReader(shadername));
+
+            StringBuilder buffer = new StringBuilder();
+            String line;
+            while ((line = brv.readLine()) != null)
+            {
+                buffer.append(line).append("\r\n");
+            }
+            brv.close();
+            return new String[]{buffer.toString()};
+        }
+        catch (IOException ex)
+        {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+public void loadAnimatedModels(GLAutoDrawable drawable) {
 
     }
 

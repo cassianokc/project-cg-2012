@@ -1,0 +1,15 @@
+# Blender v2.62 (sub 0) OBJ File: 'ceilling.blend'
+# www.blender.org
+mtllib ceillingtex.mtl
+o Mesh_ceilling
+v 0.000000 3.000000 0.000000
+v 0.000000 2.999999 6.590001
+v 10.850000 2.999999 6.590001
+v 10.850000 3.000000 0.000000
+vt 1.000000 1.006010
+vt 0.005026 1.003613
+vt 0.000000 0.003052
+vt 0.994974 0.000000
+usemtl Material.001_ceilling.jpg
+s off
+f 1/1 2/2 3/3 4/4
