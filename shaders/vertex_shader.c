@@ -1,14 +1,13 @@
-
-varying vec3 N;
-varying vec3 v;
-varying vec2 vTexCoord;
+varying vec3 vertex_normal;
+varying vec3 vertex_position;
+varying vec2 vertex_tex_coord;
 
 void main(void)
 {
 
-    v=vec3(gl_ModelViewMatrix*gl_Vertex);
-    N=normalize(gl_NormalMatrix*gl_Normal);
-    vTexCoord=vec2(gl_MultiTexCoord0);
+    vertex_position=vec3(gl_ModelViewMatrix*gl_Vertex);
+    vertex_normal=normalize(gl_NormalMatrix*gl_Normal);
+    vertex_tex_coord=vec2(gl_MultiTexCoord0);
 
     gl_Position=gl_ModelViewProjectionMatrix * gl_Vertex;
 

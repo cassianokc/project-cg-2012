@@ -78,9 +78,11 @@ public class Door extends AnimatedModel
         GL gl = glAutodrawable.getGL();
         gl.glPushMatrix();
         gl.glMatrixMode(GL.GL_MODELVIEW);
-        gl.glTranslatef(xref, yref, zref);
+        gl.glTranslatef(-xref, -yref, -zref);
         gl.glRotatef(alpha, xn, yn, zn);
+        gl.glTranslatef(xref, yref, zref);
         super.draw(glAutodrawable);
+
         gl.glPopMatrix();
     }
 

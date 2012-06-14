@@ -2,9 +2,9 @@
 # Material Count: 1
 newmtl floor_floor.jpg_floor.jpg.001
 Ns 35.294118
-Ka 0.000000 0.000000 0.000000
-Kd 0.183555 0.192000 0.140164
-Ks 0.1 0.1 0.1
+Ka 0.0 0.0 0.0
+Kd 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
 Ni 1.000000
 d 1.000000
 illum 2

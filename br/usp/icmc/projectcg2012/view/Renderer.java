@@ -64,6 +64,7 @@ public class Renderer implements GLEventListener
         drawable.setGL(new DebugGL(drawable.getGL()));
         gl.glEnable(GL.GL_LIGHTING);
         gl.glEnable(GL.GL_LIGHT0);
+        gl.glEnable(GL.GL_LIGHT1);
         gl.glEnable(GL.GL_DEPTH_TEST);
         lighting(drawable);
         shader(drawable);
@@ -103,6 +104,7 @@ public class Renderer implements GLEventListener
          * Draws the models.
          */
         it = this.skyboxModels.iterator();
+
         while (it.hasNext())
         {
             skyboxModel = (SkyboxModel) it.next();
@@ -128,35 +130,62 @@ public class Renderer implements GLEventListener
     private void lighting(GLAutoDrawable drawable)
     {
         GL gl = drawable.getGL();
-
-        float[] ambient =
+        float[] l0ambient =
         {
-            0.2f, 0.2f, 0.2f, 1.0f
+            0.8f, 0.8f, 0.8f, 1.0f
         };
-        float[] diffuse = new float[]
+        float[] l0diffuse = new float[]
         {
             0.9f, 0.9f, 0.9f, 1.0f
         };
-        float[] specular = new float[]
+        float[] l0specular = new float[]
         {
-            0.5f, 0.5f, 0.5f, 1.0f
+            0.9f, 0.9f, 0.9f, 1.0f
         };
-        float[] position = new float[]
+        float[] l0position = new float[]
         {
             posx, posy + 1, posz, 1.0f
         };
-        float[] direction = new float[]
+        float[] l1ambient =
         {
-            -posx - (float) Math.cos(alpha), -posy - beta, -posz - (float) Math.sin(alpha), 1.0f
+            0.3f, 0.3f, 0.3f, 1.0f
+        };
+        float[] l1diffuse = new float[]
+        {
+            0.9f, 0.9f, 0.9f, 1.0f
+        };
+        float[] l1specular = new float[]
+        {
+            0.9f, 0.9f, 0.9f, 1.0f
+        };
+        float[] l1position = new float[]
+        {
+            posx, posy + 1, posz, 1.0f
+        };
+        float[] l1direction = new float[]
+        {
+            posx + (float) Math.cos(alpha), +posy + beta, +posz + (float) Math.sin(alpha), 1.0f
         };
 
-        gl.glLightfv(GL.GL_LIGHT0, GL.GL_AMBIENT, ambient, 0);
-        gl.glLightfv(GL.GL_LIGHT0, GL.GL_DIFFUSE, diffuse, 0);
-        gl.glLightfv(GL.GL_LIGHT0, GL.GL_SPECULAR, specular, 0);
-        gl.glLightfv(GL.GL_LIGHT0, GL.GL_POSITION, position, 0);
-        gl.glLightf(GL.GL_LIGHT0, GL.GL_CONSTANT_ATTENUATION, 1f); //dene a0
-        gl.glLightf(GL.GL_LIGHT0, GL.GL_LINEAR_ATTENUATION, 0.5f); //dene a1
-        gl.glLightf(GL.GL_LIGHT0, GL.GL_QUADRATIC_ATTENUATION, 0.5f); //dene a2
+        gl.glLightfv(GL.GL_LIGHT0, GL.GL_AMBIENT, l0ambient, 0);
+        gl.glLightfv(GL.GL_LIGHT0, GL.GL_DIFFUSE, l0diffuse, 0);
+        gl.glLightfv(GL.GL_LIGHT0, GL.GL_SPECULAR, l0specular, 0);
+        gl.glLightfv(GL.GL_LIGHT0, GL.GL_POSITION, l0position, 0);
+        gl.glLightf(GL.GL_LIGHT0, GL.GL_CONSTANT_ATTENUATION, 1f);
+        gl.glLightf(GL.GL_LIGHT0, GL.GL_LINEAR_ATTENUATION, 0.5f);
+        gl.glLightf(GL.GL_LIGHT0, GL.GL_QUADRATIC_ATTENUATION, 0.5f);
+        gl.glLightfv(GL.GL_LIGHT1, GL.GL_AMBIENT, l1ambient, 0);
+        gl.glLightfv(GL.GL_LIGHT1, GL.GL_DIFFUSE, l1diffuse, 0);
+        gl.glLightfv(GL.GL_LIGHT1, GL.GL_SPECULAR, l1specular, 0);
+        gl.glLightfv(GL.GL_LIGHT1, GL.GL_POSITION, l1position, 0);
+        //  gl.glLightfv(GL.GL_LIGHT1, GL.GL_SPOT_DIRECTION, l1direction, 0);
+        gl.glLightf(GL.GL_LIGHT1, GL.GL_CONSTANT_ATTENUATION, 1f);
+        gl.glLightf(GL.GL_LIGHT1, GL.GL_LINEAR_ATTENUATION, 0.5f);
+        gl.glLightf(GL.GL_LIGHT1, GL.GL_QUADRATIC_ATTENUATION, 0.5f);
+        //  gl.glLightf(GL.GL_LIGHT1, GL.GL_SPOT_EXPONENT, 20f);
+
+
+
     }
 
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height)
@@ -249,6 +278,7 @@ public class Renderer implements GLEventListener
             Model model = new Model(new File("./project-cg-2012/top.obj"));
             this.normalModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL);
+
         } catch (IOException ex)
         {
             Logger.getLogger(Renderer.class.getName()).log(Level.SEVERE, null, ex);
@@ -257,6 +287,15 @@ public class Renderer implements GLEventListener
 
     public void loadAnimatedModels(GLAutoDrawable drawable)
     {
+        try
+        {
+            Fan fan = new Fan(new File("./project-cg-2012/fan.obj"), 0f, 1f, 0f, 2.177557f, 2.903257f, 3.170074f);
+            this.normalModels.add(fan);
+            fan.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH);
+        } catch (IOException ex)
+        {
+            Logger.getLogger(Renderer.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void shader(GLAutoDrawable drawable)
