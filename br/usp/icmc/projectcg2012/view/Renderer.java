@@ -48,7 +48,7 @@ public class Renderer implements GLEventListener
         this.normalModels = new ArrayList<Model>();
         this.animatedModels = new ArrayList<AnimatedModel>();
         this.skyboxModels = new ArrayList<SkyboxModel>();
-        this.alpha = 0f;
+        this.alpha = 90f;
         this.beta = 0f;
         posx = 1f;
         posy = 1.8f;
@@ -132,7 +132,7 @@ public class Renderer implements GLEventListener
         GL gl = drawable.getGL();
         float[] l0ambient =
         {
-            0.8f, 0.8f, 0.8f, 1.0f
+            1.0f, 1.0f, 1.0f, 1.0f
         };
         float[] l0diffuse = new float[]
         {
@@ -172,17 +172,17 @@ public class Renderer implements GLEventListener
         gl.glLightfv(GL.GL_LIGHT0, GL.GL_SPECULAR, l0specular, 0);
         gl.glLightfv(GL.GL_LIGHT0, GL.GL_POSITION, l0position, 0);
         gl.glLightf(GL.GL_LIGHT0, GL.GL_CONSTANT_ATTENUATION, 1f);
-        gl.glLightf(GL.GL_LIGHT0, GL.GL_LINEAR_ATTENUATION, 0.5f);
-        gl.glLightf(GL.GL_LIGHT0, GL.GL_QUADRATIC_ATTENUATION, 0.5f);
+        gl.glLightf(GL.GL_LIGHT0, GL.GL_LINEAR_ATTENUATION, 0.05f);
+        gl.glLightf(GL.GL_LIGHT0, GL.GL_QUADRATIC_ATTENUATION, 0.05f);
         gl.glLightfv(GL.GL_LIGHT1, GL.GL_AMBIENT, l1ambient, 0);
         gl.glLightfv(GL.GL_LIGHT1, GL.GL_DIFFUSE, l1diffuse, 0);
         gl.glLightfv(GL.GL_LIGHT1, GL.GL_SPECULAR, l1specular, 0);
         gl.glLightfv(GL.GL_LIGHT1, GL.GL_POSITION, l1position, 0);
-        //  gl.glLightfv(GL.GL_LIGHT1, GL.GL_SPOT_DIRECTION, l1direction, 0);
+        gl.glLightfv(GL.GL_LIGHT1, GL.GL_SPOT_DIRECTION, l1direction, 0);
         gl.glLightf(GL.GL_LIGHT1, GL.GL_CONSTANT_ATTENUATION, 1f);
         gl.glLightf(GL.GL_LIGHT1, GL.GL_LINEAR_ATTENUATION, 0.5f);
         gl.glLightf(GL.GL_LIGHT1, GL.GL_QUADRATIC_ATTENUATION, 0.5f);
-        //  gl.glLightf(GL.GL_LIGHT1, GL.GL_SPOT_EXPONENT, 20f);
+        gl.glLightf(GL.GL_LIGHT1, GL.GL_SPOT_EXPONENT, 20f);
 
 
 
@@ -275,7 +275,22 @@ public class Renderer implements GLEventListener
             Model model = new Model(new File("./project-cg-2012/toptex.obj"));
             this.normalModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
-    
+            model = new Model(new File("./project-cg-2012/barreltex.obj"));
+            this.normalModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new Model(new File("./project-cg-2012/cadeira.obj"));
+            this.normalModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new Model(new File("./project-cg-2012/table.obj"));
+            this.normalModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new Model(new File("./project-cg-2012/axe.obj"));
+            this.normalModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new Model(new File("./project-cg-2012/trashcan.obj"));
+            this.normalModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+
 
         } catch (IOException ex)
         {
@@ -308,7 +323,7 @@ public class Renderer implements GLEventListener
 
 
 
-            
+
         } catch (IOException ex)
         {
             Logger.getLogger(Renderer.class.getName()).log(Level.SEVERE, null, ex);
