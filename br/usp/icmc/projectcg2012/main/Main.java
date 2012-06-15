@@ -49,7 +49,7 @@ public class Main
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //inicializa o sistema e chama display() a 15fps
-        Animator animator = new FPSAnimator(canvas, 15);
+        Animator animator = new FPSAnimator(canvas, 30);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         animator.start();

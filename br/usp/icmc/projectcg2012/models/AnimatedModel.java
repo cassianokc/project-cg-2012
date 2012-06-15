@@ -22,6 +22,7 @@ public abstract class AnimatedModel extends Model
         this.ycenter = ycenter;
         this.zcenter = zcenter;
         this.minDistance = minDistance;
+        this.clip = null;
     }
 
     public boolean isNear(float x, float y, float z)
@@ -36,6 +37,7 @@ public abstract class AnimatedModel extends Model
     protected float ycenter;
     protected float zcenter;
     protected float minDistance;
+    protected static Clip clip;
 
     protected static void playClip(final File clipFile) throws IOException,
             UnsupportedAudioFileException, LineUnavailableException, InterruptedException
@@ -74,7 +76,7 @@ public abstract class AnimatedModel extends Model
                 {
                     AudioListener listener = new AudioListener();
                     AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(clipFile);
-                    Clip clip = AudioSystem.getClip();
+                    clip = AudioSystem.getClip();
                     clip.addLineListener(listener);
                     clip.open(audioInputStream);
                     try
@@ -92,5 +94,13 @@ public abstract class AnimatedModel extends Model
                 }
             }
         }).start();
+    }
+    
+    protected static void stopClip()
+    {
+        if(clip != null)
+        {
+            clip.stop();
+        }
     }
 }

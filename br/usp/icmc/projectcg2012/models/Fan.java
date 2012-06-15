@@ -17,8 +17,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  *
  * @author cassianokc
  */
-public class Fan extends AnimatedModel
-{
+public class Fan extends AnimatedModel {
 
     float xn, yn, zn;
     float xref, yref, zref;
@@ -28,8 +27,7 @@ public class Fan extends AnimatedModel
     public Fan(File file, float xn, float yn, float zn,
             float xref, float yref, float zref,
             float xcenter, float ycenter, float zcenter,
-            float minDistance) throws IOException
-    {
+            float minDistance) throws IOException {
         super(file, xcenter, ycenter, zcenter, minDistance);  //fan cant be animated so far.
         alpha = 0;
         this.xn = xn;
@@ -42,35 +40,29 @@ public class Fan extends AnimatedModel
     }
 
     @Override
-    public void animate()
-    {
+    public void animate() {
         setOn(!isOn());
-        if (!isOn())
-        {
-            try
-            {
-                super.playClip(new File("./project-cg-2012/fan.wav"));
-            } catch (IOException ex)
-            {
+        if (isOn()) {
+            try {
+                playClip(new File("./project-cg-2012/fan.wav"));
+            } catch (IOException ex) {
                 Logger.getLogger(Door.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (UnsupportedAudioFileException ex)
-            {
+            } catch (UnsupportedAudioFileException ex) {
                 Logger.getLogger(Door.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (LineUnavailableException ex)
-            {
+            } catch (LineUnavailableException ex) {
                 Logger.getLogger(Door.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InterruptedException ex)
-            {
+            } catch (InterruptedException ex) {
                 Logger.getLogger(Door.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+        else{
+            stopClip();
         }
     }
 
     @Override
-    public void draw(GLAutoDrawable gLAutoDrawable)
-    {
-        if (isOn())
-        {
+    public void draw(GLAutoDrawable gLAutoDrawable) {
+        if (isOn()) {
             alpha += 15f;
         }
         GL gl = gLAutoDrawable.getGL();
@@ -84,13 +76,11 @@ public class Fan extends AnimatedModel
 
     }
 
-    public boolean isOn()
-    {
+    public boolean isOn() {
         return on;
     }
 
-    public void setOn(boolean on)
-    {
+    public void setOn(boolean on) {
         this.on = on;
     }
 }
