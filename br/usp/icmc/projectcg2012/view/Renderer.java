@@ -288,7 +288,7 @@ public class Renderer implements GLEventListener
         try
         {
             Fan fan = new Fan(new File("./project-cg-2012/fan.obj"), 0f, 1f, 0f, 2.177557f, 2.903257f, 3.170074f);
-            //this.animatedModels.add(fan);
+            this.animatedModels.add(fan);
             fan.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH);
             Door door = new Door(new File("./project-cg-2012/door1tex.obj"), 0f, -1f, 0f, 6.45f, 1.8f, 2.9f, 5.55f, 1.8f, 2.9f, 0.5f);
             this.animatedModels.add(door);
