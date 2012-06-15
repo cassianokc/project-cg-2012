@@ -6,6 +6,7 @@ package br.usp.icmc.projectcg2012.models;
 
 import java.io.File;
 import java.io.IOException;
+import javax.sound.sampled.*;
 
 /**
  *
@@ -14,7 +15,7 @@ import java.io.IOException;
 public abstract class AnimatedModel extends Model
 {
 
-    public AnimatedModel(File file, float xcenter, float ycenter, float zcenter, float radius) throws IOException
+    public AnimatedModel(File file, float xcenter, float ycenter, float zcenter, float minDistance) throws IOException
     {
         super(file);
         this.xcenter = xcenter;
@@ -27,7 +28,7 @@ public abstract class AnimatedModel extends Model
     {
         return (this.minDistance > (x - this.xcenter) * (x - this.xcenter) + (y - this.ycenter) * (y - this.ycenter)
                 + (z - this.zcenter) * (z - this.zcenter));
-        
+
     }
 
     public abstract void animate();
@@ -35,4 +36,61 @@ public abstract class AnimatedModel extends Model
     protected float ycenter;
     protected float zcenter;
     protected float minDistance;
+
+    protected static void playClip(final File clipFile) throws IOException,
+            UnsupportedAudioFileException, LineUnavailableException, InterruptedException
+    {
+        class AudioListener implements LineListener
+        {
+
+            private boolean done = false;
+
+            @Override
+            public synchronized void update(LineEvent event)
+            {
+                LineEvent.Type eventType = event.getType();
+                if (eventType == LineEvent.Type.STOP || eventType == LineEvent.Type.CLOSE)
+                {
+                    done = true;
+                    notifyAll();
+                }
+            }
+
+            public synchronized void waitUntilDone() throws InterruptedException
+            {
+                while (!done)
+                {
+                    wait();
+                }
+            }
+        }
+        new Thread(new Runnable()
+        { // the wrapper thread is unnecessary, unless it blocks on the Clip finishing, see comments
+
+            public void run()
+            {
+
+                try
+                {
+                    AudioListener listener = new AudioListener();
+                    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(clipFile);
+                    Clip clip = AudioSystem.getClip();
+                    clip.addLineListener(listener);
+                    clip.open(audioInputStream);
+                    try
+                    {
+                        clip.start();
+                        listener.waitUntilDone();
+                    } finally
+                    {
+                        clip.close();
+                        audioInputStream.close();
+                    }
+                } catch (Exception e)
+                {
+                    System.err.println(e.getMessage());
+                }
+            }
+        }).start();
+    }
 }

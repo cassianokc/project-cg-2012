@@ -2,8 +2,13 @@ package br.usp.icmc.projectcg2012.models;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
+import javax.sound.sampled.*;
+import javax.sound.sampled.LineEvent.Type;
 
 /**
  *
@@ -89,6 +94,17 @@ public class Door extends AnimatedModel
 
     public void animate()
     {
+        try {
+            playClip(new File("./project-cg-2012/door.wav"));
+        } catch (IOException ex) {
+            Logger.getLogger(Door.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(Door.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (LineUnavailableException ex) {
+            Logger.getLogger(Door.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Door.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if (this.doorState == 0 || this.doorState == 1)
         {
             doorState = 2;

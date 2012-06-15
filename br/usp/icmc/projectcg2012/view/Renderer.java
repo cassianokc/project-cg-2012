@@ -132,19 +132,19 @@ public class Renderer implements GLEventListener
         GL gl = drawable.getGL();
         float[] l0ambient =
         {
-            1.0f, 1.0f, 1.0f, 1.0f
+            1f, 1f, 1f, 1f
         };
         float[] l0diffuse = new float[]
         {
-            0.9f, 0.9f, 0.9f, 1.0f
+            1f, 1f, 1f, 1f
         };
         float[] l0specular = new float[]
         {
-            0.9f, 0.9f, 0.9f, 1.0f
+            1f, 1f, 1f, 1f
         };
         float[] l0position = new float[]
         {
-            posx, posy + 1, posz, 1.0f
+            2.229693f, 2.476059f, 3.166049f, 1f
         };
         float[] l1ambient =
         {
@@ -179,10 +179,7 @@ public class Renderer implements GLEventListener
         gl.glLightfv(GL.GL_LIGHT1, GL.GL_SPECULAR, l1specular, 0);
         gl.glLightfv(GL.GL_LIGHT1, GL.GL_POSITION, l1position, 0);
         gl.glLightfv(GL.GL_LIGHT1, GL.GL_SPOT_DIRECTION, l1direction, 0);
-        gl.glLightf(GL.GL_LIGHT1, GL.GL_CONSTANT_ATTENUATION, 1f);
-        gl.glLightf(GL.GL_LIGHT1, GL.GL_LINEAR_ATTENUATION, 0.5f);
-        gl.glLightf(GL.GL_LIGHT1, GL.GL_QUADRATIC_ATTENUATION, 0.5f);
-        gl.glLightf(GL.GL_LIGHT1, GL.GL_SPOT_EXPONENT, 20f);
+        gl.glLightf(GL.GL_LIGHT1, GL.GL_SPOT_EXPONENT, 10f);
 
 
 
@@ -302,7 +299,7 @@ public class Renderer implements GLEventListener
     {
         try
         {
-            Fan fan = new Fan(new File("./project-cg-2012/fan.obj"), 0f, 1f, 0f, 2.177557f, 2.903257f, 3.170074f);
+            Fan fan = new Fan(new File("./project-cg-2012/fan.obj"), 0f, 1f, 0f, 2.177557f, 2.903257f, 3.170074f, 0f, 1.8f, 3f, 2.0f);
             this.animatedModels.add(fan);
             fan.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH);
             Door door = new Door(new File("./project-cg-2012/door1tex.obj"), 0f, -1f, 0f, 6.45f, 1.8f, 2.9f, 5.55f, 1.8f, 2.9f, 0.5f);
