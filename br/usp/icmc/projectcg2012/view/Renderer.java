@@ -278,6 +278,22 @@ public class Renderer implements GLEventListener
             Model model = new Model(new File("./project-cg-2012/top.obj"));
             this.normalModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL);
+            model = new Model(new File("./project-cg-2012/door1tex.obj"));
+            this.normalModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new Model(new File("./project-cg-2012/door2tex.obj"));
+            this.normalModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new Model(new File("./project-cg-2012/door3tex.obj"));
+            this.normalModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new Model(new File("./project-cg-2012/door4tex.obj"));
+            this.normalModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new Model(new File("./project-cg-2012/door5tex.obj"));
+            this.normalModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+
 
         } catch (IOException ex)
         {

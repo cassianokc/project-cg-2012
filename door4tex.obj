@@ -1,0 +1,15 @@
+# Blender v2.62 (sub 0) OBJ File: ''
+# www.blender.org
+mtllib door4tex.mtl
+o Mesh_Mesh_wall7
+v 6.650000 -0.000001 4.340000
+v 7.550000 -0.000001 4.340000
+v 7.550000 2.699999 4.340002
+v 6.650000 2.699999 4.340002
+vt 1.006155 0.003041
+vt -0.000479 0.003655
+vt 0.001773 0.996584
+vt 1.008407 0.995969
+usemtl Material.001_door.jpg_door.jpg.001
+s off
+f 1/1 2/2 3/3 4/4

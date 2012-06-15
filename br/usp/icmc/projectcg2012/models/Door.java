@@ -53,8 +53,9 @@ public class Door extends AnimatedModel
     }
 
     @Override
-    public void draw(GLAutoDrawable glAutodrawable)
+    public void draw(GLAutoDrawable glAutoDrawable)
     {
+        GL gl = glAutoDrawable.getGL();
         if (doorState == 0)
         {
             if (alpha < 90f)
@@ -75,14 +76,12 @@ public class Door extends AnimatedModel
                 doorState = 3;
             }
         }
-        GL gl = glAutodrawable.getGL();
-        gl.glPushMatrix();
         gl.glMatrixMode(GL.GL_MODELVIEW);
-        gl.glTranslatef(-xref, -yref, -zref);
-        gl.glRotatef(alpha, xn, yn, zn);
+        gl.glPushMatrix();
         gl.glTranslatef(xref, yref, zref);
-        super.draw(glAutodrawable);
-
+        gl.glRotatef(alpha, xn, yn, zn);
+        gl.glTranslatef(-xref, -yref, -zref);
+        super.draw(glAutoDrawable);
         gl.glPopMatrix();
     }
 

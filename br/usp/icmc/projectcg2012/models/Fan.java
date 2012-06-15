@@ -43,10 +43,8 @@ public class Fan extends AnimatedModel
         alpha = alpha + 1f;
         GL gl = gLAutoDrawable.getGL();
         gl.glMatrixMode(GL.GL_MODELVIEW);
-        gl.glPushMatrix();
-        
+        gl.glPushMatrix();  
         gl.glTranslatef(xref, yref, zref);
-        
         gl.glRotatef(alpha, xn, yn, zn);
         gl.glTranslatef(-xref, -yref, -zref);
         super.draw(gLAutoDrawable);

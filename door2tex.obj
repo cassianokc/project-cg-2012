@@ -1,0 +1,15 @@
+# Blender v2.62 (sub 0) OBJ File: 'door1.blend'
+# www.blender.org
+mtllib door2tex.mtl
+o Mesh_wall7
+v 7.400000 -0.000000 2.900000
+v 8.300000 -0.000000 2.900000
+v 8.300000 2.700000 2.900001
+v 7.400000 2.700000 2.900001
+vt 0.000000 0.003041
+vt 0.990880 0.000000
+vt 0.993132 0.992929
+vt 0.002252 0.995969
+usemtl Material.001_door.jpg
+s off
+f 1/1 2/2 3/3 4/4
