@@ -1,0 +1,15 @@
+# Blender v2.58 (sub 0) OBJ File: 'walltex.blend'
+# www.blender.org
+mtllib wall8tex.mtl
+o Mesh_wall8
+v 6.450000 0.000000 2.900000
+v 7.400000 0.000000 2.900000
+v 7.400000 3.000000 2.900000
+v 6.450000 3.000000 2.900000
+vt 0.000000 0.003038
+vt 0.996332 -0.002222
+vt 0.998305 0.993590
+vt 0.001972 0.998850
+usemtl wall_wall5.jpg
+s off
+f 1/1 2/2 3/3 4/4

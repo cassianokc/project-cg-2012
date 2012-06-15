@@ -1,0 +1,15 @@
+# Blender v2.58 (sub 0) OBJ File: 'walltex.blend'
+# www.blender.org
+mtllib wall17tex.mtl
+o Mesh_wall17
+v 8.300000 0.000000 2.900000
+v 8.300000 0.000000 3.170000
+v 8.300000 3.000000 3.170000
+v 8.300000 3.000000 2.900000
+vt 0.003511 0.996985
+vt 0.146843 0.998464
+vt 0.143330 0.004444
+vt 0.000000 0.002968
+usemtl wall_wall5.jpg
+s off
+f 1/1 2/2 3/3 4/4

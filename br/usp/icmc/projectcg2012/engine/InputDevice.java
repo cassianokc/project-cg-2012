@@ -168,12 +168,12 @@ public class InputDevice implements MouseListener, MouseMotionListener, KeyListe
                 it = animatedModels.iterator();
                 while (it.hasNext())
                 {
-                    it = animatedModels.iterator();
                     animatedModel = (AnimatedModel) it.next();
                     if (animatedModel.isNear(posx, posy, posz))
                     {
                         animatedModel.animate();
                     }
+
                 }
                 break;
         }

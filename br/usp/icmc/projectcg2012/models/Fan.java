@@ -22,7 +22,7 @@ public class Fan extends AnimatedModel
 
     public Fan(File file, float xn, float yn, float zn, float xref, float yref, float zref) throws IOException
     {
-        super(file);
+        super(file, 0.0f, 0.0f, 0.0f, 0.0f);  //fan cant be animated so far.
         alpha = 0;
         this.xn = xn;
         this.yn = yn;

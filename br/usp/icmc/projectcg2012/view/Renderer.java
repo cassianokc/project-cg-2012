@@ -219,51 +219,48 @@ public class Renderer implements GLEventListener
             model = new SkyboxModel(new File("./project-cg-2012/wall4tex.obj"));
             this.skyboxModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
-            model = new SkyboxModel(new File("./project-cg-2012/wall5.obj"));
+            model = new SkyboxModel(new File("./project-cg-2012/wall5tex.obj"));
             this.skyboxModels.add(model);
-            model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxModel(new File("./project-cg-2012/wall6.obj"));
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new SkyboxModel(new File("./project-cg-2012/wall6tex.obj"));
             this.skyboxModels.add(model);
-            model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxModel(new File("./project-cg-2012/wall7.obj"));
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new SkyboxModel(new File("./project-cg-2012/wall7tex.obj"));
             this.skyboxModels.add(model);
-            model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxModel(new File("./project-cg-2012/wall8.obj"));
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new SkyboxModel(new File("./project-cg-2012/wall8tex.obj"));
             this.skyboxModels.add(model);
-            model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxModel(new File("./project-cg-2012/wall9.obj"));
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new SkyboxModel(new File("./project-cg-2012/wall9tex.obj"));
             this.skyboxModels.add(model);
-            model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxModel(new File("./project-cg-2012/wall10.obj"));
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new SkyboxModel(new File("./project-cg-2012/wall10tex.obj"));
             this.skyboxModels.add(model);
-            model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxModel(new File("./project-cg-2012/wall11.obj"));
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new SkyboxModel(new File("./project-cg-2012/wall11tex.obj"));
             this.skyboxModels.add(model);
-            model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxModel(new File("./project-cg-2012/wall12.obj"));
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new SkyboxModel(new File("./project-cg-2012/wall12tex.obj"));
             this.skyboxModels.add(model);
-            model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxModel(new File("./project-cg-2012/wall13.obj"));
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new SkyboxModel(new File("./project-cg-2012/wall13tex.obj"));
             this.skyboxModels.add(model);
-            model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxModel(new File("./project-cg-2012/wall14.obj"));
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new SkyboxModel(new File("./project-cg-2012/wall14tex.obj"));
             this.skyboxModels.add(model);
-            model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxModel(new File("./project-cg-2012/wall15.obj"));
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new SkyboxModel(new File("./project-cg-2012/wall15tex.obj"));
             this.skyboxModels.add(model);
-            model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxModel(new File("./project-cg-2012/wall16.obj"));
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new SkyboxModel(new File("./project-cg-2012/wall16tex.obj"));
             this.skyboxModels.add(model);
-            model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxModel(new File("./project-cg-2012/wall17.obj"));
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new SkyboxModel(new File("./project-cg-2012/wall17tex.obj"));
             this.skyboxModels.add(model);
-            model.compile(drawable, Model.WF_MATERIAL);
-            model = new SkyboxModel(new File("./project-cg-2012/wall18.obj"));
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new SkyboxModel(new File("./project-cg-2012/wall18tex.obj"));
             this.skyboxModels.add(model);
-            model.compile(drawable, Model.WF_MATERIAL);
-
-
-
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
         } catch (IOException ex)
         {
             Logger.getLogger(Renderer.class.getName()).log(Level.SEVERE, null, ex);
@@ -275,25 +272,10 @@ public class Renderer implements GLEventListener
         try
         {
 
-            Model model = new Model(new File("./project-cg-2012/top.obj"));
-            this.normalModels.add(model);
-            model.compile(drawable, Model.WF_MATERIAL);
-            model = new Model(new File("./project-cg-2012/door1tex.obj"));
+            Model model = new Model(new File("./project-cg-2012/toptex.obj"));
             this.normalModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
-            model = new Model(new File("./project-cg-2012/door2tex.obj"));
-            this.normalModels.add(model);
-            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
-            model = new Model(new File("./project-cg-2012/door3tex.obj"));
-            this.normalModels.add(model);
-            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
-            model = new Model(new File("./project-cg-2012/door4tex.obj"));
-            this.normalModels.add(model);
-            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
-            model = new Model(new File("./project-cg-2012/door5tex.obj"));
-            this.normalModels.add(model);
-            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
-
+    
 
         } catch (IOException ex)
         {
@@ -306,8 +288,27 @@ public class Renderer implements GLEventListener
         try
         {
             Fan fan = new Fan(new File("./project-cg-2012/fan.obj"), 0f, 1f, 0f, 2.177557f, 2.903257f, 3.170074f);
-            this.normalModels.add(fan);
+            //this.animatedModels.add(fan);
             fan.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH);
+            Door door = new Door(new File("./project-cg-2012/door1tex.obj"), 0f, -1f, 0f, 6.45f, 1.8f, 2.9f, 5.55f, 1.8f, 2.9f, 0.5f);
+            this.animatedModels.add(door);
+            door.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            door = new Door(new File("./project-cg-2012/door2tex.obj"), 0f, -1f, 0f, 8.3f, 1.8f, 2.9f, 7.4f, 1.8f, 2.9f, 0.5f);
+            this.animatedModels.add(door);
+            door.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            door = new Door(new File("./project-cg-2012/door3tex.obj"), 0f, -1f, 0f, 3.9f, 1.8f, 4.34f, 4.8f, 1.8f, 4.34f, 0.5f);
+            this.animatedModels.add(door);
+            door.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            door = new Door(new File("./project-cg-2012/door4tex.obj"), 0f, -1f, 0f, 6.65f, 1.8f, 4.34f, 7.55f, 1.8f, 4.34f, 0.5f);
+            this.animatedModels.add(door);
+            door.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            door = new Door(new File("./project-cg-2012/door5tex.obj"), 0f, -1f, 0f, 8.3f, 1.8f, 4.07f, 8.3f, 1.8f, 3.17f, 0.5f);
+            this.animatedModels.add(door);
+            door.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+
+
+
+            
         } catch (IOException ex)
         {
             Logger.getLogger(Renderer.class.getName()).log(Level.SEVERE, null, ex);

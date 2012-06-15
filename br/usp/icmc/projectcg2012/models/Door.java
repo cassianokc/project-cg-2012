@@ -34,12 +34,14 @@ public class Door extends AnimatedModel
      * @param file The file containing the object.
      * @throws IOException
      */
-    public Door(File file, float xref, float yref, float zref,
-            float xn, float yn, float zn,
+    public Door(File file, float xn, float yn, float zn,
+            float xref, float yref, float zref,
             float xcenter, float ycenter, float zcenter,
             float minDistance) throws IOException
     {
-        super(file);
+        super(file, xcenter, ycenter, zcenter, minDistance);
+        this.doorState = 3;
+        this.alpha = 0f;
         this.xref = xref;
         this.yref = yref;
         this.zref = zref;
@@ -66,7 +68,7 @@ public class Door extends AnimatedModel
                 doorState = 1;
             }
         }
-        if (doorState == 2)
+        else if (doorState == 2)
         {
             if (alpha > 0f)
             {
