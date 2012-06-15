@@ -18,7 +18,7 @@ import javax.media.opengl.glu.GLU;
 public class Renderer implements GLEventListener
 {
 
-    private float alpha;  // camera current degree of vision, right left
+    private float alpha = 90f;  // camera current degree of vision, right left
     private float beta;  // camera current degree of vision, up and down
     private float posx;  // camera current x position
     private float posy;  // camera current y position
@@ -48,7 +48,7 @@ public class Renderer implements GLEventListener
         this.normalModels = new ArrayList<Model>();
         this.animatedModels = new ArrayList<AnimatedModel>();
         this.skyboxModels = new ArrayList<SkyboxModel>();
-        this.alpha = 90f;
+        this.alpha = 0f;
         this.beta = 0f;
         posx = 1f;
         posy = 1.8f;
@@ -66,7 +66,6 @@ public class Renderer implements GLEventListener
         gl.glEnable(GL.GL_LIGHT0);
         gl.glEnable(GL.GL_LIGHT1);
         gl.glEnable(GL.GL_DEPTH_TEST);
-        lighting(drawable);
         shader(drawable);
         /*
          * Loads and compiles, adding to the proper array list all models.
@@ -92,10 +91,10 @@ public class Renderer implements GLEventListener
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
         gl.glMatrixMode(GL.GL_MODELVIEW);
         gl.glLoadIdentity();
-
         glu.gluLookAt(posx, 1.8f + Math.sin(ang_senoide) * 0.06f, posz, //camera position
                 (radius) * (Math.sin(alpha)) + (posx) * (Math.sin(alpha)), radius * beta + 1.8 + posy + Math.sin(ang_senoide) * 0.06f, (-radius) * (Math.cos(alpha)) + (posz) * (Math.cos(alpha)), //vector to where the camera points
                 0.0, 1.0, 0.0); // viewup vector
+        lighting(drawable);
 
         gl.glMatrixMode(GL.GL_PROJECTION);
         gl.glLoadIdentity();
@@ -104,7 +103,6 @@ public class Renderer implements GLEventListener
          * Draws the models.
          */
         it = this.skyboxModels.iterator();
-
         while (it.hasNext())
         {
             skyboxModel = (SkyboxModel) it.next();
@@ -130,56 +128,48 @@ public class Renderer implements GLEventListener
     private void lighting(GLAutoDrawable drawable)
     {
         GL gl = drawable.getGL();
-        float[] l0ambient =
+        float[] white =
         {
             1f, 1f, 1f, 1f
         };
-        float[] l0diffuse = new float[]
+        float[] grey =
         {
-            1f, 1f, 1f, 1f
-        };
-        float[] l0specular = new float[]
-        {
-            1f, 1f, 1f, 1f
+            0.5f, 0.5f, 0.5f, 1f
         };
         float[] l0position = new float[]
         {
             2.229693f, 2.476059f, 3.166049f, 1f
         };
-        float[] l1ambient =
-        {
-            0.3f, 0.3f, 0.3f, 1.0f
-        };
-        float[] l1diffuse = new float[]
-        {
-            0.9f, 0.9f, 0.9f, 1.0f
-        };
-        float[] l1specular = new float[]
-        {
-            0.9f, 0.9f, 0.9f, 1.0f
-        };
+
         float[] l1position = new float[]
         {
-            posx, posy + 1, posz, 1.0f
+            posx, 1.5f, posz - 0.2f, 1.0f
+        //0f, 0f, 0f, 1f
         };
         float[] l1direction = new float[]
         {
-            posx + (float) Math.cos(alpha), +posy + beta, +posz + (float) Math.sin(alpha), 1.0f
+            (radius) * ((float) Math.sin(alpha)) + (posx) * ((float) Math.sin(alpha)) - posx, radius * beta + posy - 1.6f, (-radius) * ((float) Math.cos(alpha)) + (posz) * ((float) Math.cos(alpha)) - posz, 1.0f
+        //0f, 0f, 1f, 1f
         };
+        if (Math.random() < 0.1f)
+        {
+            gl.glLightfv(GL.GL_LIGHT0, GL.GL_AMBIENT, white, 0);
+            gl.glLightfv(GL.GL_LIGHT0, GL.GL_DIFFUSE, white, 0);
+            gl.glLightfv(GL.GL_LIGHT0, GL.GL_SPECULAR, white, 0);
+        } else
+        {
+            gl.glLightfv(GL.GL_LIGHT0, GL.GL_AMBIENT, grey, 0);
+            gl.glLightfv(GL.GL_LIGHT0, GL.GL_DIFFUSE, grey, 0);
+            gl.glLightfv(GL.GL_LIGHT0, GL.GL_SPECULAR, grey, 0);
 
-        gl.glLightfv(GL.GL_LIGHT0, GL.GL_AMBIENT, l0ambient, 0);
-        gl.glLightfv(GL.GL_LIGHT0, GL.GL_DIFFUSE, l0diffuse, 0);
-        gl.glLightfv(GL.GL_LIGHT0, GL.GL_SPECULAR, l0specular, 0);
+        }
         gl.glLightfv(GL.GL_LIGHT0, GL.GL_POSITION, l0position, 0);
         gl.glLightf(GL.GL_LIGHT0, GL.GL_CONSTANT_ATTENUATION, 1f);
-        gl.glLightf(GL.GL_LIGHT0, GL.GL_LINEAR_ATTENUATION, 0.05f);
-        gl.glLightf(GL.GL_LIGHT0, GL.GL_QUADRATIC_ATTENUATION, 0.05f);
-        gl.glLightfv(GL.GL_LIGHT1, GL.GL_AMBIENT, l1ambient, 0);
-        gl.glLightfv(GL.GL_LIGHT1, GL.GL_DIFFUSE, l1diffuse, 0);
-        gl.glLightfv(GL.GL_LIGHT1, GL.GL_SPECULAR, l1specular, 0);
+        gl.glLightf(GL.GL_LIGHT0, GL.GL_LINEAR_ATTENUATION, 0.0f);
+        gl.glLightf(GL.GL_LIGHT0, GL.GL_QUADRATIC_ATTENUATION, 0.1f);
         gl.glLightfv(GL.GL_LIGHT1, GL.GL_POSITION, l1position, 0);
         gl.glLightfv(GL.GL_LIGHT1, GL.GL_SPOT_DIRECTION, l1direction, 0);
-        gl.glLightf(GL.GL_LIGHT1, GL.GL_SPOT_EXPONENT, 10f);
+        gl.glLightf(GL.GL_LIGHT1, GL.GL_SPOT_CUTOFF, 4f);
 
 
 
