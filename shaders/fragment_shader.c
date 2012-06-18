@@ -7,7 +7,7 @@ varying vec2 vertex_tex_coord;
 
 void main(void)
 {
-    float l0linear_att;
+    float l0linear_att, l1angular_att;
     vec4 l0contrib, l1contrib=vec4(0.0, 0.0, 0.0, 0.0);
     vec3 eye_direction, l0light_direction, l0reflection_direction, l1light_direction, l1reflection_direction, l1spot_direction;
     vec4 Iamb, Idiff, Ispec;
@@ -32,12 +32,12 @@ void main(void)
     l1spot_direction=normalize(gl_LightSource[1].spotDirection);
     l1light_direction=normalize(l1light_direction);
     l1reflection_direction=normalize(-reflect(l1light_direction, vertex_normal));
-
+    l1angular_att=pow(max(dot(l1spot_direction, -l1light_direction), 0.0), 50.0);
     if (dot(-l1light_direction, l1spot_direction)>0.97)
     {
 
         l1contrib=vec4(1.0, 1.0, 1.0, 1.0);
     }
 
-    gl_FragColor=texture2D(texture, vertex_tex_coord)*(l0contrib*l0linear_att+l1contrib);
+    gl_FragColor=texture2D(texture, vertex_tex_coord)*(l0contrib*l0linear_att+l1contrib*l1angular_att);
 }

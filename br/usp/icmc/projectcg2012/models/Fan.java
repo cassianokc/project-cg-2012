@@ -28,7 +28,7 @@ public class Fan extends AnimatedModel {
             float xref, float yref, float zref,
             float xcenter, float ycenter, float zcenter,
             float minDistance) throws IOException {
-        super(file, xcenter, ycenter, zcenter, minDistance);  //fan cant be animated so far.
+        super(file, xcenter, ycenter, zcenter, minDistance); 
         alpha = 0;
         this.xn = xn;
         this.yn = yn;

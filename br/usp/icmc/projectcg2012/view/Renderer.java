@@ -18,7 +18,7 @@ import javax.media.opengl.glu.GLU;
 public class Renderer implements GLEventListener
 {
 
-    private float alpha = 90f;  // camera current degree of vision, right left
+    private float alpha;  // camera current degree of vision, right left
     private float beta;  // camera current degree of vision, up and down
     private float posx;  // camera current x position
     private float posy;  // camera current y position
@@ -48,7 +48,7 @@ public class Renderer implements GLEventListener
         this.normalModels = new ArrayList<Model>();
         this.animatedModels = new ArrayList<AnimatedModel>();
         this.skyboxModels = new ArrayList<SkyboxModel>();
-        this.alpha = 0f;
+        this.alpha = 90f;
         this.beta = 0f;
         posx = 1f;
         posy = 1.8f;
