@@ -42,6 +42,7 @@ public class Renderer implements GLEventListener
      */
     private ArrayList skyboxModels;
     private InputDevice input;
+    private int height, width;
 
     public Renderer()
     {
@@ -89,16 +90,16 @@ public class Renderer implements GLEventListener
         Model model;
         GLU glu = new GLU();
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
+        gl.glMatrixMode(GL.GL_PROJECTION);
+        gl.glLoadIdentity();
+        glu.gluPerspective(45.0, ((float)width)/((float)height+150f), 0.1, 30.0);        
+        
         gl.glMatrixMode(GL.GL_MODELVIEW);
         gl.glLoadIdentity();
         glu.gluLookAt(posx, 1.8f + Math.sin(ang_senoide) * 0.06f, posz, //camera position
                 (radius) * (Math.sin(alpha)) + (posx) * (Math.sin(alpha)), radius * beta + 1.8 + posy + Math.sin(ang_senoide) * 0.06f, (-radius) * (Math.cos(alpha)) + (posz) * (Math.cos(alpha)), //vector to where the camera points
                 0.0, 1.0, 0.0); // viewup vector
         lighting(drawable);
-
-        gl.glMatrixMode(GL.GL_PROJECTION);
-        gl.glLoadIdentity();
-        glu.gluPerspective(45.0, 1.0, 0.1, 30.0);
         /*
          * Draws the models.
          */
@@ -169,7 +170,7 @@ public class Renderer implements GLEventListener
         gl.glLightf(GL.GL_LIGHT0, GL.GL_QUADRATIC_ATTENUATION, 0.1f);
         gl.glLightfv(GL.GL_LIGHT1, GL.GL_POSITION, l1position, 0);
         gl.glLightfv(GL.GL_LIGHT1, GL.GL_SPOT_DIRECTION, l1direction, 0);
-        gl.glLightf(GL.GL_LIGHT1, GL.GL_SPOT_CUTOFF, 4f);
+        gl.glLightf(GL.GL_LIGHT1, GL.GL_SPOT_EXPONENT, 4f);
 
 
 
@@ -177,6 +178,27 @@ public class Renderer implements GLEventListener
 
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height)
     {
+        GL gl = drawable.getGL();
+
+        if (height == 0)
+        {
+            height = 1;
+        }
+
+        gl.glMatrixMode(GL.GL_PROJECTION);
+        gl.glLoadIdentity();
+        this.width = width;
+        this.height = height;
+       
+
+        System.out.println("WIDHT " + width + " " + height);
+        if (width <= height)
+        {
+            gl.glViewport(x, y, width, height);
+        } else
+        {
+            gl.glViewport(x, y, width, height);
+        }
     }
 
     public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged)
