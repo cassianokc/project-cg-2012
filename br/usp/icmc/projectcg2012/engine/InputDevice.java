@@ -164,6 +164,7 @@ public class InputDevice implements MouseListener, MouseMotionListener, KeyListe
                 break;
             case KeyEvent.VK_P:
                 setRelative(!isRelative());
+                break;
             case KeyEvent.VK_SPACE:
                 it = animatedModels.iterator();
                 while (it.hasNext())
