@@ -1,0 +1,13 @@
+# Blender MTL File: ''
+# Material Count: 1
+newmtl 01_-_Default_M1892.bm_M1892.bmp.001
+Ns 92.156863
+Ka 0.000000 0.000000 0.000000
+Kd 0.376470 0.376470 0.376470
+Ks 0.449020 0.449020 0.449020
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd M1892.bmp
+
+

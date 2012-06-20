@@ -1,0 +1,90 @@
+# Blender MTL File: ''
+# Material Count: 8
+newmtl BedWebbi_BedWebbi.png_BedWebbi.png
+Ns 90.196078
+Ka 0.000000 0.000000 0.000000
+Kd 0.365427 0.363419 0.351373
+Ks 0.164706 0.164706 0.164706
+Ni 1.000000
+d 0.000000
+illum 2
+map_Kd /home/gustavo/Desktop/3ds Files/BedWebbi.png
+map_d /home/gustavo/Desktop/3ds Files/BedWebbi.png
+
+
+newmtl Blanket0_Blanket0.jpg_Blanket0.jpg
+Ns 90.196078
+Ka 0.000000 0.000000 0.000000
+Kd 0.210824 0.208816 0.144565
+Ks 0.164706 0.164706 0.164706
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd /home/gustavo/Desktop/3ds Files/Blanket0.jpg
+
+
+newmtl Blanket1_Blanket1.jpg_Blanket1.jpg
+Ns 90.196078
+Ka 0.000000 0.000000 0.000000
+Kd 0.387514 0.387514 0.387514
+Ks 0.164706 0.164706 0.164706
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd /home/gustavo/Desktop/3ds Files/Blanket1.jpg
+
+
+newmtl Foregrou.001
+Ns 90.196078
+Ka 0.000000 0.000000 0.000000
+Kd 0.126494 0.164643 0.144565
+Ks 0.164706 0.164706 0.164706
+Ni 1.000000
+d 1.000000
+illum 2
+
+
+newmtl Mattress_Mattress.jpg_Mattress.jpg
+Ns 90.196078
+Ka 0.000000 0.000000 0.000000
+Kd 0.363419 0.355388 0.353381
+Ks 0.164706 0.164706 0.164706
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Mattress.jpg
+
+
+newmtl Painte01_Painte01.jpg_Painte01.jpg
+Ns 90.196078
+Ka 0.000000 0.000000 0.000000
+Kd 0.214839 0.228894 0.210824
+Ks 0.164706 0.164706 0.164706
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Painte01.jpg
+
+
+newmtl Painted0_Painted0.jpg_Painted0.jpg
+Ns 90.196078
+Ka 0.000000 0.000000 0.000000
+Kd 0.128502 0.148581 0.120470
+Ks 0.164706 0.164706 0.164706
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Painted0.jpg
+
+
+newmtl Pillow_Pillow.jpg_Pil_Pillow.jpg
+Ns 90.196078
+Ka 0.000000 0.000000 0.000000
+Kd 0.415624 0.409600 0.395545
+Ks 0.164706 0.164706 0.164706
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Pillow.jpg
+
+

@@ -92,7 +92,7 @@ public class Renderer implements GLEventListener
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
         gl.glMatrixMode(GL.GL_PROJECTION);
         gl.glLoadIdentity();
-        glu.gluPerspective(45.0, ((float)width)/((float)height+150f), 0.1, 30.0);        
+        glu.gluPerspective(45.0, ((float)width)/((float)height), 0.1, 30.0);        
         
         gl.glMatrixMode(GL.GL_MODELVIEW);
         gl.glLoadIdentity();
@@ -189,9 +189,7 @@ public class Renderer implements GLEventListener
         gl.glLoadIdentity();
         this.width = width;
         this.height = height;
-       
 
-        System.out.println("WIDHT " + width + " " + height);
         if (width <= height)
         {
             gl.glViewport(x, y, width, height);
@@ -299,6 +297,43 @@ public class Renderer implements GLEventListener
             model = new Model(new File("./project-cg-2012/trashcan.obj"));
             this.normalModels.add(model);
             model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new Model(new File("./project-cg-2012/knife.obj"));
+            this.normalModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new Model(new File("./project-cg-2012/Crate1.obj"));
+            this.normalModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new Model(new File("./project-cg-2012/cbc001.obj"));
+            this.normalModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new Model(new File("./project-cg-2012/WoodenCrate02.obj"));
+            this.normalModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new Model(new File("./project-cg-2012/bed.obj"));
+            this.normalModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new Model(new File("./project-cg-2012/bath.obj"));
+            this.normalModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new Model(new File("./project-cg-2012/tap.obj"));
+            this.normalModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new Model(new File("./project-cg-2012/sword.obj"));
+            this.normalModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new Model(new File("./project-cg-2012/stool.obj"));
+            this.normalModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new Model(new File("./project-cg-2012/gun.obj"));
+            this.normalModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new Model(new File("./project-cg-2012/table2.obj"));
+            this.normalModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+            model = new Model(new File("./project-cg-2012/toilet.obj"));
+            this.normalModels.add(model);
+            model.compile(drawable, Model.WF_MATERIAL | Model.WF_SMOOTH | Model.WF_TEXTURE);
+
 
 
         } catch (IOException ex)
