@@ -1,0 +1,17 @@
+Authors:
+	Cassiano Kleinert Casagrande
+	Gustavo Livrare Martins
+	Maria Fernanda Avelino
+
+
+Compiling:
+	Install Netbeans JOGL plugin.
+	Create a Netbeans JOGL project.
+	Go to project properties and set source directory to the cloned repository.
+	Compile and run.
+
+Program:
+	Use WASD keys to move and mouse to look around.
+	Use P key to lock the mouse.
+	Space open doors and turn fan on.
+
